@@ -1,4 +1,5 @@
 import {clientId, clientSecret} from './secret.js';
+// import * as dotenv from 'dotenv';
 
 //IFFI function (self calling function)
 const APIController = ( async () => {
@@ -27,11 +28,8 @@ const APIController = ( async () => {
         return data.categories.items;
     }
     const genres = await getGenres(await getToken());
-    console.log("all the genres: ")
-    genres.forEach(element => {
-        
-        console.log(element.id, element.name);  
-    });
+    console.log("all the genres: ", genres);
+   
     
 
     //3. get playlist from spotify API
@@ -45,8 +43,8 @@ const APIController = ( async () => {
         return data.playlists.items;
     }
     //save the hiphop playlists in the array
-    const playlist = await getPlaylist(await getToken(), '0JQ5DAqbMKFQ00XGBls6ym');
-    console.log("first hipHop playlist: ", playlist[0]);
+    const playlist = await getPlaylist(await getToken(), genres[3].id);
+    console.log(`Playlists from genre ${genres[3].name} is:`, playlist);
 
 
     //4. get tracks from spotify API
@@ -60,9 +58,10 @@ const APIController = ( async () => {
         return data.items;
     }
     //save the tracks of first playlist in an array
-    const tracks=await getTracks(await getToken(), playlist[0].id);
-    console.log("all tracks of playlist 1: ", tracks);
+    const tracks=await getTracks(await getToken(), playlist[3].id);
+    console.log(`all tracks of playlist: ${playlist[3].name}`, tracks);
 
+    //5. get one track from spotify API
     const getTrack = async (token, trackId) => {
         const result = await fetch(`https://api.spotify.com/v1/tracks/${trackId}`, {
             method: 'GET',
@@ -74,4 +73,6 @@ const APIController = ( async () => {
     //get one track
     const track = await getTrack(await getToken(), tracks[0].track.id);
     console.log("track 1: ", track);
+
+
 })();
