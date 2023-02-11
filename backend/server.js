@@ -1,8 +1,8 @@
-import * as dotenv from 'dotenv';
-dotenv.config();
-import express from 'express';
-import cors from 'cors';
-import mongoose from 'mongoose';
+require('dotenv').config(); 
+const express = require('express');
+const cors = require('cors');
+const mongoose = require('mongoose');
+const routes = require('./routes/routes');
 
 const mongoString = process.env.DATABASE_URL;
 
@@ -19,6 +19,6 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-// app.use('/api', routes);
+app.use('/api', routes);
 
 app.listen(3001, () => console.log(`Server started on port ${3001}`));
