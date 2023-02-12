@@ -1,8 +1,19 @@
 import {clientId, clientSecret} from './secret.js';
-// import * as dotenv from 'dotenv';
+require('dotenv').config(); 
+const mongoose = require('mongoose');
+const express = require('express');
 
-//IFFI function (self calling function)
-const APIController = ( async () => {
+const mongoString = process.env.DATABASE_URL;
+mongoose.connect(mongoString, { useNewUrlParser: true, useUnifiedTopology: true })
+const database = mongoose.connection;
+database.on('error', (error) => console.error(error));
+database.once('open', () => console.log('Connected to database'));
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+app.listen(3000, () => console.log(`Server started on port ${3000}`));
+
 
     //1. get authentification token for using spotify API 
     const getToken = async () => {
@@ -30,11 +41,10 @@ const APIController = ( async () => {
     const genres = await getGenres(await getToken());
     console.log("all the genres: ", genres);
    
-    
 
     //3. get playlist from spotify API
     const getPlaylist = async (token, genreId) => {
-        const limit = 10;
+        const limit = 50;
         const result = await fetch(`https://api.spotify.com/v1/browse/categories/${genreId}/playlists?limit=${limit}`, {
             method: 'GET',
             headers: { 'Authorization': 'Bearer ' + token }
@@ -43,13 +53,13 @@ const APIController = ( async () => {
         return data.playlists.items;
     }
     //save the hiphop playlists in the array
-    const playlist = await getPlaylist(await getToken(), genres[3].id);
-    console.log(`Playlists from genre ${genres[3].name} is:`, playlist);
-
+    const playlist = await getPlaylist(await getToken(), genres[4].id);
+    console.log(`Playlists from genre ${genres[4].name} is:`, playlist);
+   
 
     //4. get tracks from spotify API
     const getTracks = async (token, playlistId) => {
-        const limit = 10;
+        const limit = 100;
         const result = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks?limit=${limit}`, {
             method: 'GET',
             headers: { 'Authorization': 'Bearer ' + token }
@@ -57,22 +67,14 @@ const APIController = ( async () => {
         const data = await result.json();
         return data.items;
     }
-    //save the tracks of first playlist in an array
-    const tracks=await getTracks(await getToken(), playlist[3].id);
-    console.log(`all tracks of playlist: ${playlist[3].name}`, tracks);
-
-    //5. get one track from spotify API
-    const getTrack = async (token, trackId) => {
-        const result = await fetch(`https://api.spotify.com/v1/tracks/${trackId}`, {
-            method: 'GET',
-            headers: { 'Authorization': 'Bearer ' + token }
-        });
-        const data = await result.json();
-        return data;
-    }
-    //get one track
-    const track = await getTrack(await getToken(), tracks[0].track.id);
-    console.log("track 1: ", track);
 
 
-})();
+    //create an array with all the tracks from the hiphop playlists
+    const tracks = [];
+    for (let i = 0; i < playlist.length; i++) {
+        const track = await getTracks(await getToken(), playlist[i].id);
+        tracks.push(...track);
+    }   
+    console.log("all the tracks: ", tracks);
+  
+
