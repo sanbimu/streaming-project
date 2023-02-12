@@ -1,9 +1,13 @@
-import {clientId, clientSecret} from './secret.js';
+
 require('dotenv').config(); 
 const mongoose = require('mongoose');
 const express = require('express');
+const cors = require('cors');
 
 const mongoString = process.env.DATABASE_URL;
+const clientId = process.env.CLIENT_ID;
+const clientSecret = process.env.CLIENT_SECRET;
+
 mongoose.connect(mongoString, { useNewUrlParser: true, useUnifiedTopology: true })
 const database = mongoose.connection;
 database.on('error', (error) => console.error(error));
@@ -14,7 +18,7 @@ app.use(express.json());
 
 app.listen(3000, () => console.log(`Server started on port ${3000}`));
 
-
+(async () => {
     //1. get authentification token for using spotify API 
     const getToken = async () => {
         const result = await fetch('https://accounts.spotify.com/api/token', {
@@ -77,4 +81,4 @@ app.listen(3000, () => console.log(`Server started on port ${3000}`));
     }   
     console.log("all the tracks: ", tracks);
   
-
+})();

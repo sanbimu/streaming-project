@@ -40,7 +40,8 @@ const trackSchema = new Schema({
     },
     id: {
         type: String,
-        required: false
+        required: true,
+        unique: true
     },
     is_local: {
         type: Boolean,

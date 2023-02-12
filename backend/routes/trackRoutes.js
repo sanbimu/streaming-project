@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router()
 module.exports = router;
-const Model = require('../model/model');
+const Model = require('../model/trackModel');
 
 //Post Method
 router.post('/post', async (req, res) => {
@@ -24,9 +24,14 @@ router.post('/post', async (req, res) => {
         type: req.body.type,
         uri: req.body.uri
     })
-    track.save()
-        .then(data => res.json(data))
-        .catch(error => res.status(400).json('Error: '+ error))
+    try{
+        const trackToSave = await track.save();
+        res.status(200).json(trackToSave)
+    }
+    catch(error){
+        res.status(400).json({message: error.message})
+
+    }
 })
 
 //Get all Method
