@@ -3,6 +3,8 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const express = require('express');
 const cors = require('cors');
+const trackModel = require('./model/trackModel');
+
 
 const mongoString = process.env.DATABASE_URL;
 const clientId = process.env.CLIENT_ID;
@@ -73,12 +75,26 @@ app.listen(3000, () => console.log(`Server started on port ${3000}`));
     }
 
 
-    //create an array with all the tracks from the hiphop playlists
+    //5. create an array with all the tracks from the hiphop playlists
     const tracks = [];
     for (let i = 0; i < playlist.length; i++) {
         const track = await getTracks(await getToken(), playlist[i].id);
         tracks.push(...track);
     }   
-    console.log("all the tracks: ", tracks);
-  
+    const onlyTracks = tracks.map(track => track.track).filter(track => track );
+    console.log("all the tracks: ", onlyTracks);
+   // console.log("how many tracks with id 1HGUqudu5nWcqVxGW3fXr9 ? ", onlyTracks.filter(track => track.id === "4ZyivnzrvDWRjihgqxvXK8").length);
+
+   //6 save the tracks in the database
+   const seedDB = async () => {
+        await trackModel.deleteMany({});
+        await trackModel.insertMany(onlyTracks);
+        console.log("Database seeded");
+    }
+    seedDB().then(() => {
+        mongoose.connection.close();
+    });
+
+    
+    
 })();
