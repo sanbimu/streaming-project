@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import Background from './components/Background';
+import LandingPage from './pages/LandingPage';
 
 function App() {
-return <Background />
+return <LandingPage />;
 }
 
 export default App
