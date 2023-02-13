@@ -2,7 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const routes = require('./routes/trackRoutes');
+const trackRoutes = require('./routes/trackRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 const mongoString = process.env.DATABASE_URL;
 
@@ -19,6 +20,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use('/api', routes);
+app.use('/track', trackRoutes);
+app.use('/user', userRoutes);
 
 app.listen(3001, () => console.log(`Server started on port ${3001}`));
