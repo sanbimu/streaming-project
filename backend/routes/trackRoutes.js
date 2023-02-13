@@ -24,12 +24,12 @@ router.post('/post', async (req, res) => {
         type: req.body.type,
         uri: req.body.uri
     })
-    try{
+    try {
         const trackToSave = await track.save();
         res.status(200).json(trackToSave)
     }
-    catch(error){
-        res.status(400).json({message: error.message})
+    catch (error) {
+        res.status(400).json({ message: error.message })
 
     }
 })
