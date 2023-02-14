@@ -45,7 +45,8 @@ app.listen(3000, () => console.log(`Server started on port ${3000}`));
         return data.categories.items;
     }
     const genres = await getGenres(await getToken());
-    console.log("all the genres: ", genres);
+    console.log('Genres from spotify is: \n');
+    genres.forEach(genre => console.log(genre.name));
    
 
     //3. get playlist from spotify API
@@ -58,10 +59,13 @@ app.listen(3000, () => console.log(`Server started on port ${3000}`));
         const data = await result.json();
         return data.playlists.items;
     }
-    //save the hiphop playlists in the array
+    //save playlists in the array
     const playlist = await getPlaylist(await getToken(), genres[4].id);
-    console.log(`Playlists from genre ${genres[4].name} is:`, playlist);
-   
+    const playlistDance = await getPlaylist(await getToken(), genres[5].id);
+    //const playlistPop = await getPlaylist(await getToken(), genres[3].id);
+    console.log(`Playlists from genre ${genres[4].name} is: \n`);
+    playlist.forEach(playlist => console.log(playlist.name))
+    console.log(`\n`)
 
     //4. get tracks from spotify API
     const getTracks = async (token, playlistId) => {
@@ -82,13 +86,41 @@ app.listen(3000, () => console.log(`Server started on port ${3000}`));
         tracks.push(...track);
     }   
     const onlyTracks = tracks.map(track => track.track).filter(track => track );
-    console.log("all the tracks: ", onlyTracks);
-   // console.log("how many tracks with id 1HGUqudu5nWcqVxGW3fXr9 ? ", onlyTracks.filter(track => track.id === "4ZyivnzrvDWRjihgqxvXK8").length);
+    
+
+    //5.2 create an array with all the tracks from the dance playlists
+    const tracksDance = [];
+    for (let i = 0; i < playlistDance.length; i++) {
+        const track = await getTracks(await getToken(), playlistDance[i].id);
+        tracksDance.push(...track);
+    }
+    const onlyTracksDance = tracksDance.map(track => track.track).filter(track => track );
+    onlyTracks.push(...onlyTracksDance);
+
+    //5.3 create an array with all the tracks from the pop playlists
+    // const tracksPop = [];
+    // for (let i = 0; i < playlistPop.length; i++) {
+    //     const track = await getTracks(await getToken(), playlistPop[i].id);
+    //     tracksPop.push(...track);
+    // }
+    // const onlyTracksPop = tracksPop.map(track => track.track).filter(track => track );
+    // onlyTracks.push(...onlyTracksPop);
+
+    //6. unique onlyTracks array
+    const uniqueTracks = onlyTracks.filter((track, index, self) =>  
+        index === self.findIndex((t) => (
+            t.id === track.id
+        ))
+    )
+    //console.log("all the tracks hiphop + dance: ", onlyTracks.length);
+    console.log("unique tracks hiphop + dance: ", uniqueTracks.length);
+   
+
 
    //6 save the tracks in the database
    const seedDB = async () => {
         await trackModel.deleteMany({});
-        await trackModel.insertMany(onlyTracks);
+        await trackModel.insertMany(uniqueTracks);
         console.log("Database seeded");
     }
     seedDB().then(() => {
