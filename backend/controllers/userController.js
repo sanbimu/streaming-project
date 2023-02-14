@@ -1,7 +1,8 @@
 const Model = require('../model/userModel');
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
+require('dotenv').config();
+const secret = process.env.SECRET;
 exports.signup = async (req, res) => {
     try{
         const hashedPassword = await bcryptjs.hash(req.body.password, 10)
@@ -24,7 +25,7 @@ exports.login = async (req, res) => {
         if(user){
             const result = await bcryptjs.compare(req.body.password, user.password)
             if(result){
-                const token = jwt.sign({username: user.username, email: user.email}, process.env.TOKEN_SECRET)
+                const token = jwt.sign({username: user.username, email: user.email}, secret)
                 res.status(200).json({token: token})
             }
             else{
@@ -35,7 +36,7 @@ exports.login = async (req, res) => {
             res.status(400).json({message: 'User not found'})
         }
 
-    }catch{
+    }catch(error){
         res.status(400).json({message: error.message})
     }
 }
