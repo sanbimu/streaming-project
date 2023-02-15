@@ -20,9 +20,8 @@ module.exports = {
       'purple': '##B98AFF',
     },
     fontFamily: {
-      ubuntu: ['ubuntu', 'sans-serif'],
-      circe: ['circe', 'sans-serif'],
-      circeRounded: ['circe-rounded', 'sans-serif']
+      ubuntu: ['Ubuntu', 'sans-serif'],
+      droid: ['Droid Sans', 'sans-serif'],
     },
     extend: {}
   },
