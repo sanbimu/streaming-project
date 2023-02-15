@@ -72,7 +72,7 @@ exports.updateUser = async (req, res) => {
             updateUser.password = await bcryptjs.hash(updateUser.password, 10)
         }
 
-        const result = Model.findByIdAndUpdate(id, updateUser, options);
+        const result = await Model.findByIdAndUpdate(id, updateUser, options).exec();
         res.status(200).send(result);
     }
     catch(error){
