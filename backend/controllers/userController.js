@@ -68,6 +68,10 @@ exports.updateUser = async (req, res) => {
         const updateUser = req.body;
         const options = {new: true};
 
+        if(updateUser.password){
+            updateUser.password = await bcryptjs.hash(updateUser.password, 10)
+        }
+
         const result = Model.findByIdAndUpdate(id, updateUser, options);
         res.status(200).send(result);
     }
