@@ -4,7 +4,7 @@ import Button from './Button';
 import Questions from './Questions';
 import Footer from './Footer';
 
-const LandingPage = () => {
+const LandingComplete = () => {
     return (
         <div className="flex flex-col h-full">
             <div className="flex-1 bg-beige">
@@ -32,4 +32,4 @@ const LandingPage = () => {
       );
     };
 
-export default LandingPage;
+export default LandingComplete;
