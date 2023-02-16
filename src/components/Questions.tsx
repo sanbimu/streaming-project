@@ -2,7 +2,7 @@ import React from 'react';
 
 const Questions  = () => {
     return ( 
-        <div id = "QuestionBox" className="bg-beige bg-opacity-75 w-10/12 h-4/5 mx-auto mt-24 mb-24 px-1 py-10 flex flex-col justify-left"> 
+        <div id = "QuestionBox" className="bg-beige bg-opacity-75 w-10/12 h-3-5 mx-auto mt-24 mb-24 px-1 py-10 flex flex-col justify-left"> 
             <h1 className = "color-dark-grey font-raleway font-normal antialiased text-opacity-90 mx-16 mt-4 mb-8 text-4xl">Wave Music Streaming FAQ</h1>
                 <h4 className = "color-dark-grey font-ubuntu text-xl mx-16 mt-2 mb-2">What is Wave?</h4>
                     <p className = "color-dark-grey font-raleway font-lighter text-base mx-16 leading-relaxed">Wave is a music streaming service that lets you listen to your favorite songs and discover new music from all over the world. 

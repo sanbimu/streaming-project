@@ -16,8 +16,8 @@ module.exports = {
       'beige': '#F7F2EC',
       'yellow': '#FFDA8A',
       'light-yellow': '#ffeabd',
-      'red': '##ffa08a',
-      'purple': '##B98AFF',
+      'red': '#ffa08a',
+      'purple': '#B98AFF',
     },
     fontFamily: {
       ubuntu: ['Ubuntu', 'sans-serif'],
@@ -27,7 +27,11 @@ module.exports = {
       raleway: ['Raleway', 'sans-serif'],
       podkova: ['Podkova', 'serif'],
     },
-    extend: {}
+    extend: {
+      borderColor: {
+        'danger': '#ffeabd',
+      },
+    }
   },
   plugins: [],
 }
