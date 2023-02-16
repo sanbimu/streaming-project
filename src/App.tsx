@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import LandingPage from './pages/LandingPage';
+import LandingPageOne from './pages/LandingPageOne';
 
 function App() {
-return <LandingPage />;
+return <LandingPageOne />;
 }
 
 export default App

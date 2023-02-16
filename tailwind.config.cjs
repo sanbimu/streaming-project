@@ -22,6 +22,10 @@ module.exports = {
     fontFamily: {
       ubuntu: ['Ubuntu', 'sans-serif'],
       droid: ['Droid Sans', 'sans-serif'],
+      gentium: ['Gentium Book Plus', 'serif'], 
+      mulish: ['Mulish', 'sans-serif'], 
+      raleway: ['Raleway', 'sans-serif'],
+      podkova: ['Podkova', 'serif'],
     },
     extend: {}
   },

@@ -4,7 +4,7 @@ import Button from './Button';
 import Questions from './Questions';
 import Footer from './Footer';
 
-const Background = () => {
+const LandingPage = () => {
     return (
         <div className="flex flex-col h-full">
             <div className="flex-1 bg-beige">
@@ -12,7 +12,7 @@ const Background = () => {
                     <div id = "YellowBox" className="bg-yellow bg-opacity-75 w-8/12 lg:w-5/12 h-4/5 mx-auto flex items-center justify-center">
                         <div>
                             <Logo />
-                                <Button text="LOGIN"></Button> 
+                            <Button text="LOGIN"></Button> 
                             <Button text="SUBSCRIBE"></Button> 
                         </div>
                     </div>
@@ -32,4 +32,4 @@ const Background = () => {
       );
     };
 
-export default Background;
+export default LandingPage;
