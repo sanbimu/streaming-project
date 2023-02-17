@@ -5,49 +5,39 @@ import Footer from '../components/Footer';
 import LoginForm from '../components/LoginForm';
 import Button from "../components/Button";
 
-// const axiosInstance = axios.create({
-//   baseURL: 'https://fullstacksoundwave.herokuapp.com/',
-//   timeout: 5000,
-//   headers: { 'X-Custom-Header': 'value' }
-// });
+const axiosInstance = axios.create({
+  baseURL: 'https://fullstacksoundwave.herokuapp.com',
+  timeout: 5000,
+  headers: { 'X-Custom-Header': 'value' }
+});
 
-// axiosInstance.post('/users/login', {
-//     username: 'loic',
-//     password: '1234'
-//   })
-//   .then(response => {
-//     console.log(response.data);
-//   })
-//   .catch(error => {
-//     console.log(error);
-//   });
-
+axiosInstance.get('/user/getAll', {
+    data: 'example data'
+  })
+  .then(response => {
+    console.log(response.data);
+  })
+  .catch(error => {
+    console.log(error);
+  });
 
 
 const Login = () => {
 
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
+  const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUsername(e.target.value);
   };
 
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePasswordInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     // add your login logic here
-  };
-
-  const handleForgotPassword = () => {
-    // add your forgot password logic here
-  };
-
-  const handleResetPassword = () => {
-    // add your reset password logic here
   };
 
     return (
@@ -61,8 +51,7 @@ const Login = () => {
                             </div>
                             <LoginForm  />
                             <Button id = "longTextButton" className = "w-44 h-8 items-center my-4 mx-auto mt-8" text="LOGIN" linkTo="/LandingPage" type="submit" />
-                            <Button id = "longTextButton" className = "w-44 h-8 items-center my-4 mx-auto" text="FORGOT PASSWORD" linkTo="/LandingPage" onClick={handleForgotPassword} />
-                            <Button id = "longTextButton" className = "w-44 h-8 items-center my-4 mx-auto" text="RESET PASSWORD" linkTo="/LandingPage" onClick={handleResetPassword}/>
+                            <Button id = "longTextButton" className = "w-44 h-8 items-center my-4 mx-auto" text="FORGOT PASSWORD" linkTo="/ForgotPassword" type="submit" />
                         </div>
                     </div>
                 </div>
