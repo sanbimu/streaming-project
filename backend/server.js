@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const trackRoutes = require('./routes/trackRoutes');
 const userRoutes = require('./routes/userRoutes');
 const resetPasswordRoute = require('./routes/resetPasswordRoute');
-
+const port = process.env.PORT || 3001;
 const mongoString = process.env.DATABASE_URL;
 
 //remove the warning
@@ -26,5 +26,3 @@ app.use('/user', userRoutes);
 app.use('/reset-password', resetPasswordRoute);
 
 app.listen(3001, () => console.log(`Server started on port ${3001}`));
-
-

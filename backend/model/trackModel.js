@@ -10,10 +10,7 @@ const trackSchema = new Schema({
         type: Array,
         required: false
     },
-    available_markets: {
-        type: Array,
-        required: false
-    },
+ 
     disc_number: {
         type: Number,
         required: false

@@ -6,6 +6,7 @@ const cors = require('cors');
 const trackModel = require('./model/trackModel');
 
 
+
 const mongoString = process.env.DATABASE_URL;
 const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
@@ -45,7 +46,7 @@ app.listen(3000, () => console.log(`Server started on port ${3000}`));
         return data.categories.items;
     }
     const genres = await getGenres(await getToken());
-    console.log("all the genres: ", genres);
+   
    
 
     //3. get playlist from spotify API
@@ -58,10 +59,12 @@ app.listen(3000, () => console.log(`Server started on port ${3000}`));
         const data = await result.json();
         return data.playlists.items;
     }
-    //save the hiphop playlists in the array
+    //save playlists in the array
     const playlist = await getPlaylist(await getToken(), genres[4].id);
-    console.log(`Playlists from genre ${genres[4].name} is:`, playlist);
-   
+    const playlistDance = await getPlaylist(await getToken(), genres[5].id);
+    
+    
+
 
     //4. get tracks from spotify API
     const getTracks = async (token, playlistId) => {
@@ -79,16 +82,56 @@ app.listen(3000, () => console.log(`Server started on port ${3000}`));
     const tracks = [];
     for (let i = 0; i < playlist.length; i++) {
         const track = await getTracks(await getToken(), playlist[i].id);
-        tracks.push(...track);
-    }   
+        tracks.push(...track);    
+    }
     const onlyTracks = tracks.map(track => track.track).filter(track => track );
-    console.log("all the tracks: ", onlyTracks);
-   // console.log("how many tracks with id 1HGUqudu5nWcqVxGW3fXr9 ? ", onlyTracks.filter(track => track.id === "4ZyivnzrvDWRjihgqxvXK8").length);
+    
+
+      //5.2 create an array with all the tracks from the dance playlists
+      const tracksDance = [];
+      for (let i = 0; i < playlistDance.length; i++) {
+          const track = await getTracks(await getToken(), playlistDance[i].id);
+          tracksDance.push(...track);
+      }
+      const onlyTracksDance = tracksDance.map(track => track.track).filter(track => track );
+      onlyTracks.push(...onlyTracksDance);
+
+  
+
+    //6. unique onlyTracks array
+    const uniqueTracks = onlyTracks.filter((track, index, self) =>  
+        index === self.findIndex((t) => (
+            t.id === track.id
+        ))
+    )
+    
+    const uniqueTracksPreview = uniqueTracks.filter(tracks => tracks.preview_url !== null)
+    .map(track => { 
+        return {
+            id: track.id,
+            name: track.name,
+            artists: track.artists.map(artist => artist.name),
+            album: {
+                name: track.album.name,
+                images: track.album.images.map(image => image.url),
+                artists: track.album.artists.map(artist => artist.name),
+                release_date: track.album.release_date
+            },
+            preview_url: track.preview_url,
+            popularity: track.popularity,
+            duration_ms: track.duration_ms,
+        }
+    });
+
+
+    console.log("unique tracks for hiphop and dance with a preview link: ", uniqueTracksPreview);
+   
+
 
    //6 save the tracks in the database
    const seedDB = async () => {
         await trackModel.deleteMany({});
-        await trackModel.insertMany(onlyTracks);
+        await trackModel.insertMany(uniqueTracksPreview);
         console.log("Database seeded");
     }
     seedDB().then(() => {

@@ -3,6 +3,7 @@ const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const secret = process.env.SECRET;
+
 exports.signup = async (req, res) => {
     try{
         const hashedPassword = await bcryptjs.hash(req.body.password, 10)
@@ -22,21 +23,75 @@ exports.signup = async (req, res) => {
 exports.login = async (req, res) => {
     try{
         const user = await Model.findOne({username: req.body.username})
+        console.log(req.body)
         if(user){
             const result = await bcryptjs.compare(req.body.password, user.password)
             if(result){
                 const token = jwt.sign({username: user.username, email: user.email}, secret)
-                res.status(200).json({token: token})
+                res.status(200).json({token: token, message: 'Logged in'})
             }
             else{
                 res.status(400).json({message: 'Wrong password'})
             }
         }
         else{
-            res.status(400).json({message: 'User not found'})
+            res.status(400).json({message: 'User not found: ' + req.body.password})
         }
 
     }catch(error){
         res.status(400).json({message: error.message})
     }
 }
+
+exports.getAllUsers = async (req, res) => {
+    try{
+        //const users = await Model.findOne({username: "loic"});
+        const users = await Model.find()
+        res.status(200).json(users)
+        //res.status(400).json(users.username)
+    }
+        catch(error){
+        res.status(400).json({message: error.message})
+    }
+}
+
+exports.getOneUser = async (req, res) => {
+    try{
+        const user = await Model.findById(req.params.id);
+        res.status(200).json(user)
+    }
+    catch(error){
+        res.status(400).json({message: error.message})
+    }
+}
+
+exports.updateUser = async (req, res) => {
+    try{
+        const id = req.params.id;
+        const updateUser = req.body;
+        const options = {new: true};
+
+        if(updateUser.password){
+            updateUser.password = await bcryptjs.hash(updateUser.password, 10)
+        }
+
+        const result = await Model.findByIdAndUpdate(id, updateUser, options).exec();
+        res.status(200).send(result);
+    }
+    catch(error){
+        res.status(400).json({message: error.message})
+    }
+}
+
+exports.deleteUser = async (req, res) => {
+    try{
+        const id = req.params.id;
+        const result = await Model.findByIdAndDelete(id);
+        res.status(200).send(`username: ${result.username} deleted`);
+    }catch{
+        res.status(400).json({message: error.message})
+    }
+}
+
+
+
