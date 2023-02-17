@@ -23,18 +23,19 @@ exports.signup = async (req, res) => {
 exports.login = async (req, res) => {
     try{
         const user = await Model.findOne({username: req.body.username})
+        console.log(req.body)
         if(user){
             const result = await bcryptjs.compare(req.body.password, user.password)
             if(result){
                 const token = jwt.sign({username: user.username, email: user.email}, secret)
-                res.status(200).json({token: token})
+                res.status(200).json({token: token, message: 'Logged in'})
             }
             else{
                 res.status(400).json({message: 'Wrong password'})
             }
         }
         else{
-            res.status(400).json({message: 'User not found'})
+            res.status(400).json({message: 'User not found: ' + req.body.password})
         }
 
     }catch(error){
@@ -44,8 +45,10 @@ exports.login = async (req, res) => {
 
 exports.getAllUsers = async (req, res) => {
     try{
-        const users = await Model.find();
+        //const users = await Model.findOne({username: "loic"});
+        const users = await Model.find()
         res.status(200).json(users)
+        //res.status(400).json(users.username)
     }
         catch(error){
         res.status(400).json({message: error.message})
