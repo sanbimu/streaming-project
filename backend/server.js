@@ -1,4 +1,4 @@
-require('dotenv').config(); 
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -26,3 +26,5 @@ app.use('/user', userRoutes);
 app.use('/reset-password', resetPasswordRoute);
 
 app.listen(3001, () => console.log(`Server started on port ${3001}`));
+
+

@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const nodemailer = require('nodemailer');
 const User = require('../model/userModel');
+const Mailgun = require('mailgun.js');
+const formData = require('form-data');
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.MAIL_USER,
-    pass: process.env.MAIL_PASS,
-  },
+const mailgun = new Mailgun(formData);
+const client = mailgun.client({
+  username: 'api',
+  key: "f33a1ad05243ec379a0936b73bc2b426-ca9eeb88-e33ade4c",
+  url: 'https://api.eu.mailgun.net'
 });
 
 router.post('/', async (req, res) => {
@@ -25,13 +25,42 @@ router.post('/', async (req, res) => {
     const token = await user.generateResetPasswordToken();
 
     // Send an email to the user containing a link to reset their password
-    const resetUrl = `${process.env.CLIENT_URL}/reset/${user._id}/${token}`;
-    await transporter.sendMail({
-      from: process.env.EMAIL,
+    const resetUrl = `http://${process.env.MAILGUN_DOMAIN}/reset/${user._id}/${token}`;
+
+    const msg = {
       to: user.email,
+      from: 'Wave <noreply@nodestarter.eu>',
       subject: 'Password Reset Request',
-      html: `<p>Please click the following link to reset your password: <a href="${resetUrl}">${resetUrl}</a></p>`,
-    });
+      text: `Bonjour,
+
+             Veuillez cliquer sur le lien ci-dessous pour réinitialiser votre mot de passe :
+
+             ${resetUrl}
+
+             Ce lien expirera dans 1 heure.
+
+             Si vous n'avez pas demandé de réinitialisation de mot de passe, veuillez ignorer ce message.
+
+             Cordialement,
+
+             L'équipe Wave`,
+
+      html: ` <html>
+                <body>
+                  <p>Bonjour,</p>
+                  <p>Veuillez cliquer sur le lien ci-dessous pour réinitialiser votre mot de passe :</p>
+                  <p><a href="${resetUrl}">${resetUrl}</a></p>
+                  <p>Ce lien expirera dans 1 heure.</p>
+                  <p>Si vous n'avez pas demandé de réinitialisation de mot de passe, veuillez ignorer ce message.</p>
+                  <p>Cordialement,</p>
+                  <p>L'équipe Wave</p>
+                </body>
+              </html>`
+    };
+
+    await client.messages.create(process.env.MAILGUN_DOMAIN, msg)
+      .then(msg => console.log(msg))
+      .catch(err => console.log(err));
 
     res.status(200).json({ message: 'Password reset email sent' });
   } catch (error) {
