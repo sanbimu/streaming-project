@@ -11,9 +11,11 @@ const LandingPage = () => {
                 <div id = "BeigeContainer" className = "bg-beige h-screen flex items-center justify-center">     
                     <div id = "YellowBox" className="bg-yellow bg-opacity-75 w-8/12 lg:w-5/12 h-4/5 mx-auto flex items-center justify-center">
                         <div>
-                            <Logo />
-                            <Button text="LOGIN" linkTo="/Login" />
-                            <Button text="SUBSCRIBE" linkTo="/Subscribe" />
+                            <div className = "flex justify-center items-center mx-auto mt-14 mb-24">
+                                <Logo />
+                            </div>
+                            <Button id = "CustomButton" className = "w-56 h-12 text-base items-center" text="LOGIN" linkTo="/Login" />
+                            <Button id = "CustomButton" className = "w-56 h-12 text-base items-center" text="SUBSCRIBE" linkTo="/Subscribe" />
                         </div>
                     </div>
                 </div>

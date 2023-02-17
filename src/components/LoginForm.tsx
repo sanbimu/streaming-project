@@ -28,16 +28,16 @@ const LoginForm = () => {
 
   return (
     <div className="flex items-center justify-center">
-        <form onSubmit={handleLogin} className="p-10">
+        <form onSubmit={handleLogin} className="px-auto">
             <div className="mb-4">
-                <label className="block color-dark-grey font-mulish tracking-wide font-bold antialiased text-opacity-90 mb-2 pl-1" htmlFor="email">
-                     Email
+                <label className="block color-dark-grey font-mulish tracking-wide font-bold antialiased text-opacity-90 mb-2 pl-1" htmlFor="username">
+                     Username
                 </label>
                 <input
                     className="appearance-none border border-danger rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="email"
-                    type="email"
-                    placeholder="Email"
+                    id="username"
+                    type="username"
+                    placeholder="Username"
                     value={email}
                     onChange={handleEmailChange}></input>
             </div>
@@ -53,14 +53,10 @@ const LoginForm = () => {
                     value={password}
                     onChange={handlePasswordChange}></input>
             </div>
-            <div className="flex items-center justify-between">
-                <Button text="LOGIN" linkTo="/LandingPage" type="submit" />
-                <Button text="FORGOT PASSWORD" linkTo="/LandingPage" onClick={handleForgotPassword} />
-                <Button text="RESET PASSWORD" linkTo="/LandingPage" onClick={handleResetPassword}/>
-            </div>
       </form>
   </div>
   );
 };
 
 export default LoginForm;
+

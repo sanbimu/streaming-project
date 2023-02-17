@@ -1,10 +1,11 @@
 import React from 'react';
-
-const Logo  = () => {
+interface LogoProps {
+    className?: string;
+  };
+  
+const Logo: React.FC<LogoProps> = ({ className }) => {
     return ( 
-        <div className = "flex justify-center items-center mx-auto mt-14 mb-24">
-        <img id = "waveLogoMain" src = "./WAVE-logo-black-01.svg" alt ="wave logo"></img>
-        </div>
+        <img className = {className} id = "waveLogoMain" src = "./WAVE-logo-black-01.svg" alt ="wave logo"></img>
      );
 }
  
