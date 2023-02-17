@@ -5,6 +5,7 @@ import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
 import ForgotPassword from './pages/ForgotPassword';
 import Subscribe from './pages/Subscribe';
+import SubscribeTerms from './pages/SubscribeTerms';
 
 function App() {
 return (
@@ -24,6 +25,10 @@ return (
         <Routes>
             <Route path="/Subscribe" element={<Subscribe />} />
         </Routes>
+        <Routes>
+            <Route path="/SubscribeTerms" element={<SubscribeTerms />} />
+        </Routes>
+        
     </div>
 </div>
 </Router>

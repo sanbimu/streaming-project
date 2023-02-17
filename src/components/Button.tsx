@@ -14,7 +14,7 @@ const Button: React.FC<ButtonProps> = ({ id, className, text, linkTo, type, onCl
   return (
     <Link to={linkTo}>
       <button id = {id}
-        className={`${className} bg-dark-dray text-yellow font-droid font-light flex justify-center`}
+        className={`${className} bg-dark-grey text-yellow font-droid font-light flex justify-center`}
         type={type}
         onClick={onClick}>
         {text}

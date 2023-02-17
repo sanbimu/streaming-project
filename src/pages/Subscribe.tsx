@@ -35,8 +35,8 @@ const Subscribe = () => {
                         <div className = "flex justify-center items-center mx-auto mb-20">
                             <Logo className = "h-24"/>
                         </div>
-                        <SubscribeOne  />
-                        <Button id = "longTextButton" className = "w-44 h-8 items-center my-4 mx-auto mt-8" text="NEXT" linkTo="/SubscribeTerms" type="submit" />
+                            <SubscribeOne  />
+                            <Button id = "longTextButton" className = "w-44 h-8 items-center my-4 mx-auto mt-8" text="NEXT" linkTo="/SubscribeTerms" type="submit" />
                     </div>
                 </div>
             </div>

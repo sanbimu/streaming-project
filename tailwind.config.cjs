@@ -12,7 +12,7 @@ module.exports = {
       xl: '1440px',
     },
     colors: {
-      'dark-dray': '#202020',
+      'dark-grey': '#202020',
       'beige': '#F7F2EC',
       'yellow': '#FFDA8A',
       'light-yellow': '#ffeabd',
