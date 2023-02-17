@@ -1,9 +1,11 @@
 
-require('dotenv').config(); 
-const mongoose = require('mongoose');
-const express = require('express');
-const cors = require('cors');
-const trackModel = require('./model/trackModel');
+import dotenv from 'dotenv';
+dotenv.config();
+import express from 'express';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import trackModel from './model/trackModel';
+import fetch from 'node-fetch';
 
 
 const mongoString = process.env.DATABASE_URL;
@@ -83,7 +85,7 @@ app.listen(3000, () => console.log(`Server started on port ${3000}`));
     const tracks = [];
     for (let i = 0; i < playlist.length; i++) {
         const track = await getTracks(await getToken(), playlist[i].id);
-        tracks.push(...track);
+        track.forEach(track => tracks.push({album: track.album, artists: track.artists, id: track.id, name: track.name, external_urls: track.external_urls.spotify, popularity: track.popularity, preview_url: track.preview_url}));
     }   
     const onlyTracks = tracks.map(track => track.track).filter(track => track );
     
@@ -92,19 +94,13 @@ app.listen(3000, () => console.log(`Server started on port ${3000}`));
     const tracksDance = [];
     for (let i = 0; i < playlistDance.length; i++) {
         const track = await getTracks(await getToken(), playlistDance[i].id);
-        tracksDance.push(...track);
+        track.forEach(track => tracks.push({album: track.album, artists: track.artists, id: track.id, name: track.name, external_urls: track.external_urls.spotify, popularity: track.popularity, preview_url: track.preview_url}));
+    
     }
     const onlyTracksDance = tracksDance.map(track => track.track).filter(track => track );
     onlyTracks.push(...onlyTracksDance);
 
-    //5.3 create an array with all the tracks from the pop playlists
-    // const tracksPop = [];
-    // for (let i = 0; i < playlistPop.length; i++) {
-    //     const track = await getTracks(await getToken(), playlistPop[i].id);
-    //     tracksPop.push(...track);
-    // }
-    // const onlyTracksPop = tracksPop.map(track => track.track).filter(track => track );
-    // onlyTracks.push(...onlyTracksPop);
+ 
 
     //6. unique onlyTracks array
     const uniqueTracks = onlyTracks.filter((track, index, self) =>  
@@ -113,7 +109,7 @@ app.listen(3000, () => console.log(`Server started on port ${3000}`));
         ))
     )
     //console.log("all the tracks hiphop + dance: ", onlyTracks.length);
-    console.log("unique tracks hiphop + dance: ", uniqueTracks.length);
+    console.log("unique tracks hiphop + dance: ", uniqueTracks);
    
 
 
