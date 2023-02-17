@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
 import ForgotPassword from './pages/ForgotPassword';
+import Subscribe from './pages/Subscribe';
 
 function App() {
 return (
@@ -19,6 +20,9 @@ return (
         </Routes>
         <Routes>
             <Route path="/ForgotPassword" element={<ForgotPassword />} />
+        </Routes>
+        <Routes>
+            <Route path="/Subscribe" element={<Subscribe />} />
         </Routes>
     </div>
 </div>

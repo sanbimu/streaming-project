@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import Button from "./Button";
 
 const ForgotPassForm= () => {
   const [email, setEmail] = useState("");
 
-  const handlePasswordInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleEmailInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
 
@@ -25,7 +24,7 @@ const ForgotPassForm= () => {
                     type="email"
                     placeholder="Email"
                     value={email}
-                    onChange={handlePasswordInput}></input>
+                    onChange={handleEmailInput}></input>
             </div>
       </form>
   </div>
