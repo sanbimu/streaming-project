@@ -12,14 +12,11 @@ const ShowAll: React.FC = () => {
           <div className="pb-4">
             <Navbar />
           </div>
-          <div className="pb-4">
-            <Content />
+          <div className="">
+            <MusicPlayer />
           </div>
           <div className="pb-4 ">
             <Content2 />
-          </div>
-          <div className="">
-            <MusicPlayer />
           </div>
         </div>
       </div>

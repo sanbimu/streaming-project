@@ -8,7 +8,7 @@ const Content = () => {
           <h1 className="font-bold">Weekly Top Track</h1>
         </div>
         <div className="col-span-1 h-40 w-40 lg:h-60 lg:w-60 bg-white hover:scale-125 hover:bg-black items-center justify-center flex rounded-lg ">
-          X
+          W
         </div>
         <div className="col-span-1 h-40 w-40 lg:h-60 lg:w-60 bg-white hover:scale-125 hover:bg-black items-center justify-center flex rounded-lg">
           X
