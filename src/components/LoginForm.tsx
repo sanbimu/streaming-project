@@ -1,4 +1,23 @@
 import React, { useState } from "react";
+import Button from "./Button";
+import axios from "axios";
+
+
+const axiosInstance = axios.create({
+  baseURL: 'https://fullstacksoundwave.herokuapp.com',
+  timeout: 5000,
+  headers: { 'X-Custom-Header': 'value' }
+});
+
+axiosInstance.get('/user/getAll', {
+    data: 'example data'
+  })
+  .then(response => {
+    console.log(response.data);
+  })
+  .catch(error => {
+    console.log(error);
+  });
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -6,15 +25,26 @@ const LoginForm = () => {
 
   const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
+    
   };
 
   const handlePasswordInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
+   
   };
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // add your login logic here
+    axiosInstance.post('/user/login', {
+      username: username,
+      password: password
+    })
+    .then(response => {
+      console.log(response.data);
+    })
+    .catch(error => {
+      console.log(error);
+    });
   };
 
   return (
@@ -44,6 +74,8 @@ const LoginForm = () => {
                     value={password}
                     onChange={handlePasswordInput}></input>
             </div>
+            <Button id = "longTextButton" className = "w-44 h-8 items-center my-4 mx-auto mt-8" text="LOGIN"  type="submit"/>
+            {/* <Button id = "longTextButton" className = "w-44 h-8 items-center my-4 mx-auto" text="FORGOT PASSWORD" linkTo="" type="submit" /> */}
       </form>
   </div>
   );
