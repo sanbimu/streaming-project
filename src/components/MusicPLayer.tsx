@@ -7,8 +7,10 @@ interface Track {
   duration: number;
   url: string;
   preview_url: string;
-  album: object;
-  images: object;
+  album: {
+    images: string[];
+  };
+
 }
 
 const MusicPlayer: React.FC = () => {
@@ -61,7 +63,7 @@ const MusicPlayer: React.FC = () => {
   const visibleTracks = tracks.slice(start, start + 4);
 
   return (
-    <div className="rounded-lg">
+    <div className="rounded-lg flex flex-col justify-center items-center">
       <h1 className="text-xl font-bold mb-4 flex justify-center">
         Weekly Top Track
       </h1>
@@ -69,24 +71,24 @@ const MusicPlayer: React.FC = () => {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 ">
           {visibleTracks.map((track) => (
             <div
-              key={track.id}
-              className="p-2 bg-white hover:scale-125 rounded-lg border w-30 h-40 lg:w-60 lg:h-60 flex items-center"
-            >
-              <div className="mr-4">
-                <h2 className=" font-medium">{track.name}</h2>
-                <p className="text-black">{track.artists}</p>
-              </div>
-              <img
-                src={track.album.images[1]}
-                alt="track.images"
-                className="w-32 h-32 object-fit lg:w-32 lg:h-32"
-              />
-              <button
-                className="bg-green-500 text-white font-bold py-2 px-4 rounded-full ml-auto"
-                onClick={() => playTrack(track)}
-              >
-                Play
-              </button>
+                key={track.id}
+                className="p-1 bg-white hover:scale-125 rounded-lg border w-60 h-60 lg:w-80 lg:h-80 flex flex-col items-center justify-center"
+                >
+                <div className="m-2">
+                  <h2 className=" font-medium text-center">{track.name}</h2>
+                  <p className="text-black text-center">{track.artists}</p>
+                </div>
+                <img
+                  src={track.album.images[0]}
+                  alt="track.images"
+                  className="w-32 h-32 object-fit lg:w-48 lg:h-48"
+                />
+                <button
+                  className="bg-green-500 text-white font-bold py-2 px-4 rounded-full my-2"
+                  onClick={() => playTrack(track)}
+                >
+                  Play
+                </button>
             </div>
           ))}
         </div>
@@ -108,10 +110,10 @@ const MusicPlayer: React.FC = () => {
         </button>
       </div>
       {currentTrack && (
-        <div className="p-4 bg-black text-white rounded-lg mt-4 flex items-center ">
+        <div className="p-4 w-4/6 bg-black text-white rounded-lg mt-4 flex flex-col items-center justify-center">
           <h3 className="text-lg font-medium">{currentTrack.name}</h3>
           <button
-            className="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full ml-auto"
+            className="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full"
             onClick={pauseTrack}
           >
             Pause
