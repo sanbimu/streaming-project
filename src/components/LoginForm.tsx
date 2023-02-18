@@ -40,10 +40,14 @@ const LoginForm = () => {
       password: password
     })
     .then(response => {
-      console.log(response.data);
+      //login successful
+      console.log(response.data.message);
+      console.log("token: ",response.data.token);
+      localStorage.setItem("token", response.data.token);
     })
     .catch(error => {
-      console.log(error);
+      //login failed
+      console.log(error.response.data.message);
     });
   };
 
