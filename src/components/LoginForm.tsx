@@ -1,27 +1,22 @@
 import React, { useState } from "react";
 import Button from "./Button";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
-
-const axiosInstance = axios.create({
-  baseURL: 'https://fullstacksoundwave.herokuapp.com',
-  timeout: 5000,
-  headers: { 'X-Custom-Header': 'value' }
-});
-
-axiosInstance.get('/user/getAll', {
-    data: 'example data'
-  })
-  .then(response => {
-    console.log(response.data);
-  })
-  .catch(error => {
-    console.log(error);
-  });
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [token, setToken] = useState("");
+
+  const Navigate = useNavigate();
+  
+  const axiosInstance = axios.create({
+    baseURL: 'https://fullstacksoundwave.herokuapp.com',
+    timeout: 5000,
+    headers: { 'X-Custom-Header': 'value' }
+  });
+  
 
   const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
@@ -35,18 +30,21 @@ const LoginForm = () => {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
+
     axiosInstance.post('/user/login', {
       username: username,
       password: password
     })
     .then(response => {
       //login successful
-      console.log(response.data.message);
-      console.log("token: ",response.data.token);
+      console.log("set token inside local storage");
       localStorage.setItem("token", response.data.token);
+      console.log(localStorage.getItem("token"));
+      Navigate("/showall")
     })
     .catch(error => {
       //login failed
+      localStorage.setItem("token", error.response.data.message);
       console.log(error.response.data.message);
     });
   };
@@ -78,7 +76,7 @@ const LoginForm = () => {
                     value={password}
                     onChange={handlePasswordInput}></input>
             </div>
-            <Button id = "longTextButton" className = "w-44 h-8 items-center my-4 mx-auto mt-8" text="LOGIN"  type="submit"/>
+            <Button id = "longTextButton" className = "w-44 h-8 items-center my-4 mx-auto mt-8" text="LOGIN" type="submit" onClick={handleLogin}/>
             {/* <Button id = "longTextButton" className = "w-44 h-8 items-center my-4 mx-auto" text="FORGOT PASSWORD" linkTo="" type="submit" /> */}
       </form>
   </div>

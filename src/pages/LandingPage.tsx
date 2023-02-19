@@ -3,8 +3,22 @@ import Logo from '../components/Logo';
 import Button from '../components/Button';
 import Questions from '../components/Questions';
 import Footer from '../components/Footer';
+import { useNavigate } from "react-router";
+import { Component } from 'react';
+
 
 const LandingPage = () => {
+    const navigateTo = useNavigate();
+    
+    const loginPage = () => {
+        navigateTo('/Login');
+    }
+
+    const subscribePage = () => {
+        navigateTo('/Subscribe');
+    }
+    
+
     return (
         <div className="flex flex-col h-full">
             <div className="flex-1 bg-beige">
@@ -14,8 +28,8 @@ const LandingPage = () => {
                             <div className = "flex justify-center items-center mx-auto mt-14 mb-24">
                                 <Logo />
                             </div>
-                            <Button id = "CustomButton" className = "w-56 h-12 text-base items-center" text="LOGIN" linkTo="/Login" />
-                            <Button id = "CustomButton" className = "w-56 h-12 text-base items-center" text="SUBSCRIBE" linkTo="/Subscribe" />
+                            <Button id = "CustomButton" className = "w-56 h-12 text-base items-center" text="LOGIN" onClick={loginPage} />
+                            <Button id = "CustomButton" className = "w-56 h-12 text-base items-center" text="SUBSCRIBE" onClick={subscribePage} />
                         </div>
                     </div>
                 </div>

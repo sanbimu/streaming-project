@@ -2,9 +2,11 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import Content from "../components/Content";
 import Content2 from "../components/Content2";
-import MusicPlayer from "../components/MusicPLayer";
+import MusicPlayer from "./MusicPLayer";
 
 const ShowAll: React.FC = () => {
+  
+  console.log(localStorage.getItem("token"));
   return (
     <>
       <div className="BgColor lg:pl-14 lg:pr-14 h-screen ">
