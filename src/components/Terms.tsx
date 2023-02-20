@@ -2,19 +2,28 @@ import React, { useState } from "react";
 import Button from "./Button";
 
 const Terms = () => {
+
     const [isChecked, setIsChecked] = useState(false);
 
     const handleCheck = () => {
-      setIsChecked(!isChecked);
+        setIsChecked(!isChecked);
+        const errorMsg = document.getElementById("needAccept");
+        if (errorMsg) {
+          errorMsg.style.display = !isChecked ? "none" : "block";
+        }
     };
   
     const handleNext = () => {
-      if (!isChecked) {
-        alert("Please accept the terms and conditions to proceed.");
-      } else {
-        window.location.href = "/SubscribePay";
-      }
+        if (isChecked) {
+            window.location.href = "/SubscribePay";
+          } else {
+            const needAccept = document.getElementById("needAccept");
+            if (needAccept) {
+              needAccept.style.display = "block";
+            }
+        }
     };
+
 
   return (
     <div>
@@ -56,14 +65,26 @@ const Terms = () => {
             <p className="font-bold">8. Governing Law</p>
             These terms and conditions shall be governed by and construed in accordance with the laws of Belgium. 
             Any disputes arising out of or in connection with these terms and conditions shall be subject to the exclusive jurisdiction of the courts of Belgium.
-            <br /><br />
             </p>
-        <div className="flex items-center font-raleway font-lighter text-base leading-relaxed mb-4">
-            <input type="checkbox" id="acceptTerms" checked={isChecked} onChange={handleCheck} className="mr-2" />
+        <div className="flex items-center font-raleway font-lighter text-base leading-relaxed my-1">
+            <input 
+                type="checkbox" 
+                id="acceptTerms" 
+                checked={isChecked} 
+                onChange={handleCheck}
+                className="mr-2" />
             <label htmlFor="acceptTerms" className="text-dark-grey text-sm">I accept the terms and conditions</label>
         </div>
     </div>
-    <Button onClick={handleNext} disabled={!isChecked} id = "longTextButton" className = "w-44 h-8 items-center my-4 mx-auto mt-8" text="NEXT" type="submit" />
+    <Button 
+    onClick={handleNext} 
+    id = "longTextButton" 
+    className = "w-44 h-8 items-center mt-2 mb-4 mx-auto" 
+    text="NEXT" 
+    type="submit" 
+    disabled={!isChecked} 
+    />
+    <p id= "needAccept" className="text-center text-dark-grey text-sm font-raleway mx-4">Please accept the terms and conditions.</p>
     </div>
   );
 };

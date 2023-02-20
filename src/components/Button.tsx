@@ -11,14 +11,23 @@ interface ButtonProps {
   disabled?: boolean;
 };
 
-const Button: React.FC<ButtonProps> = ({ id, className, text, linkTo = "/", type, onClick, disabled }) => {
+const Button: React.FC<ButtonProps> = ({ 
+   id, 
+   className, 
+   text, 
+   linkTo = "/", 
+   type, 
+   onClick,
+   disabled
+  }) => {
   return (
     <Link to={linkTo}>
       <button id = {id}
         className={`${className} bg-dark-grey text-yellow font-droid font-light flex justify-center`}
         type={type}
         onClick={onClick}
-        disabled={disabled}>
+        disabled={disabled}
+        >
         {text}
       </button>
     </Link>
