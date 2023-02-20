@@ -11,7 +11,7 @@ const SubscribeOne = () => {
     const [errorString, setErrorString] = useState("");
     
     const NavigateTo = useNavigate();
-    
+
     const axiosInstance = axios.create({
       baseURL: 'https://fullstacksoundwave.herokuapp.com',
       timeout: 5000,
@@ -38,8 +38,19 @@ const SubscribeOne = () => {
         return;
       }
       else{
-
-        NavigateTo("/SubscribeTerms");
+        axiosInstance.post('/user/register', {
+          email: email,
+          username: username,
+          password: password
+        })
+        .then(response => {
+          console.log(response);
+          NavigateTo("/SubscribeTerms");
+        })
+        .catch(error => {
+          console.log(error.message);
+          setErrorString("Something went wrong, please try again: " + error.message);
+        });
         
       }
     };
