@@ -1,25 +1,48 @@
 import React, { useState } from "react";
+import Button from "../components/Button";
+import { useNavigate } from "react-router";
+import axios from 'axios';
+
 
 const SubscribeOne = () => {
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [errorString, setErrorString] = useState("");
+    
+    const NavigateTo = useNavigate();
+    
+    const axiosInstance = axios.create({
+      baseURL: 'https://fullstacksoundwave.herokuapp.com',
+      timeout: 5000,
+      headers: { 'X-Custom-Header': 'value' }
+    });
 
-  const handleEmailInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
 
-  const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(e.target.value);
-  };
+    const handleEmailInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setEmail(e.target.value);
+    };
+  
+    const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setUsername(e.target.value);
+    };
+  
+    const handlePasswordInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setPassword(e.target.value);
+    };
+  
+    const handleSubscribeOne = (e: React.FormEvent) => {
+      e.preventDefault();
+      if (email === "" || username === "" || password === ""){
+        setErrorString("Please fill in all the fields");
+        return;
+      }
+      else{
 
-  const handlePasswordInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-
-  const handleSubscribeOne = () => {
-    // add your forgot password logic here
-  };
+        NavigateTo("/SubscribeTerms");
+        
+      }
+    };
 
   return (
     <div className="flex items-center justify-center">
@@ -34,7 +57,7 @@ const SubscribeOne = () => {
                     type="email"
                     placeholder="Email"
                     value={email}
-                    onChange={handlePasswordInput}></input>
+                    onChange={handleEmailInput}></input>
             </div>
             <div className="mb-4">
                 <label className="block color-dark-grey font-mulish tracking-wide font-bold antialiased text-opacity-90 mb-2 pl-1" htmlFor="username">
@@ -60,6 +83,12 @@ const SubscribeOne = () => {
                     value={password}
                     onChange={handlePasswordInput}></input>
             </div>
+            <Button id = "longTextButton" className = "w-44 h-8 items-center my-4 mx-auto mt-8" text="NEXT" onClick={handleSubscribeOne} type="submit" />
+
+                {/* needs to be styled */}
+                <div>
+                    <p>{errorString}</p>
+                </div>
       </form>
   </div>
   );
