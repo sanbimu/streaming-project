@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+//typescript interface for type checking
 interface Track {
   id: number;
   name: string;

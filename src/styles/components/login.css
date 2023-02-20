@@ -1,0 +1,6 @@
+#longTextButton {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    letter-spacing: 0.3em;
+    font-size: 11px;
+    text-shadow: 0.5px 0.5px 0px rgba(255,234,189,0.5);
+};
