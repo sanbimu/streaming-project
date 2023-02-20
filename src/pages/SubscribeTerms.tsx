@@ -6,7 +6,7 @@ import Terms from '../components/Terms';
 import Button from "../components/Button";
 
 const SubscribeTerms = () => {
-
+  
   return (
     <div className="flex flex-col h-full">
         <div className="flex-1 bg-beige">
@@ -17,15 +17,14 @@ const SubscribeTerms = () => {
                             <Logo className = "h-12"/>
                         </div>
                             <Terms  />
-                            <Button id = "longTextButton" className = "w-44 h-8 items-center my-4 mx-auto mt-8" text="NEXT" linkTo="/SubscribePay" type="submit" />
                     </div>
                 </div>
             </div>
             <div className="bg-beige w-screen h-10 flex justify-center items-center">
                     <Footer />
-                </div>
-        </div>
             </div>
+        </div>
+    </div>
   );
 };
 

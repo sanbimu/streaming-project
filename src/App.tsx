@@ -17,6 +17,9 @@ return (
             <Route path="/" element={<LandingPage />} />
         </Routes>
         <Routes>
+            <Route path="/LandingPage" element={<LandingPage />} />
+        </Routes>
+        <Routes>
             <Route path="/Login" element={<Login />} />
         </Routes>
         <Routes>
