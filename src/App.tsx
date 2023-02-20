@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import ForgotPassword from './pages/ForgotPassword';
 import Subscribe from './pages/Subscribe';
 import SubscribeTerms from './pages/SubscribeTerms';
+import SubscribePay from './pages/SubscribePay';
 
 function App() {
 return (
@@ -30,6 +31,9 @@ return (
         </Routes>
         <Routes>
             <Route path="/SubscribeTerms" element={<SubscribeTerms />} />
+        </Routes>
+        <Routes>
+            <Route path="/SubscribePay" element={<SubscribePay />} />
         </Routes>
         
     </div>
