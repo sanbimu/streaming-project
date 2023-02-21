@@ -94,9 +94,7 @@ userSchema.statics.resetPassword = async function (token, newPassword) {
     user.resetTokenExpires = undefined;
     await user.save();
 
-    // Remove the reset password token. ici on a un probleme
-    await resetPasswordToken.resetPasswordToken.remove();
-
+    
 };
 
 // Create the User model and export it
