@@ -68,19 +68,24 @@ userSchema.statics.verifyAndRemoveResetPasswordToken = async function (userId, t
 // Define a static method to reset a user's password
 userSchema.statics.resetPassword = async function (token, newPassword) {
     // Find the reset password token
-    const resetPasswordToken = await this.findOne({ token });
+   
+    
+    const resetPasswordToken = await this.findOne({ resetPasswordToken: token });
+ 
     if (!resetPasswordToken) {
-        throw new Error('Invalid or expired reset password token');
+        throw new Error('Invalid or expired reset password token, ON GALERATE ICI ');
     }
-    console.log("reserPasswordToken", resetPasswordToken)
+    console.log("reserPasswordToken name", resetPasswordToken.username)
 
     // Find the user associated with the token
-    const user = await this.findById(resetPasswordToken.userId);
-    if (!user) {
-        throw new Error('User not found');
-    }
+    const user = await this.findById(resetPasswordToken);
+    console.log("user with the pw we want to reset ", user)
+    // if (!user) {
+    //     throw new Error('User not found');
+    // }
 
     // Hash the new password
+    console.log("newpassword is : ", newPassword)
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
     // Update the user's password
@@ -89,11 +94,9 @@ userSchema.statics.resetPassword = async function (token, newPassword) {
     user.resetTokenExpires = undefined;
     await user.save();
 
-    // Remove the reset password token
-    await resetPasswordToken.remove();
+    // Remove the reset password token. ici on a un probleme
+    await resetPasswordToken.resetPasswordToken.remove();
 
-    console.log("resetPasswordToken", resetPasswordToken);
-    console.log("user", user);
 };
 
 // Create the User model and export it

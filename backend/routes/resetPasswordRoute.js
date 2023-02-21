@@ -74,11 +74,12 @@ router.post('/', async (req, res) => {
 router.post('/:userId/:token', async (req, res) => {
   const { userId, token } = req.params;
   const { newPassword } = req.body;
-
+  
+  
   try {
     // Reset the user's password
     await User.resetPassword(token, newPassword);
-
+    
     res.status(200).json({ message: 'Password reset successfully' });
   } catch (error) {
     console.error(error);
