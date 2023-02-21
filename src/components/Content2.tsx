@@ -35,6 +35,10 @@ const Content2: React.FC = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    loadMoreTracks();
+  }, []);
+
   const playTrack = (track: Track) => {
     setCurrentTrack(track);
     audio.src = track.preview_url;
@@ -54,6 +58,10 @@ const Content2: React.FC = () => {
     )
     .slice(start, start + 4);
 
+  const loadMoreTracks = () => {
+    setStart(start + 4);
+  };
+
   return (
     <div className="rounded-lg flex flex-col justify-center items-center">
       <h1 className="text-xl font-bold mb-4 flex justify-center">Discover</h1>
@@ -63,18 +71,25 @@ const Content2: React.FC = () => {
           {visibleTracks.map((track) => (
             <div
               key={track.id}
-              className=" hover:scale-125 rounded-lg border flex flex-col items-center justify-center"
+              className=" hover:scale-125 rounded-lg border flex flex-col items-center justify-center shadow-xl"
             >
               <img
                 src={track.album.images[0]}
                 alt="track.images"
-                className="w-32 h-32 object-fit lg:w-48 lg:h-48 rounded"
+                className="w-32 h-32 object-fit lg:w-48 lg:h-48 rounded "
                 onClick={() => playTrack(track)}
               />
             </div>
           ))}
         </div>
       </div>
+
+      <button
+        className="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full mt-4"
+        onClick={loadMoreTracks}
+      >
+        Load More
+      </button>
 
       {currentTrack && (
         <div className="fixed bottom-0 w-full p-4  bg-black text-white rounded-lg mt-4 flex items-center justify-between">
@@ -88,6 +103,7 @@ const Content2: React.FC = () => {
             )}
             <h3 className="text-lg font-medium">{currentTrack.name}</h3>
           </div>
+
           {isPlaying ? (
             <button
               className="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full"

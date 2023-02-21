@@ -1,4 +1,10 @@
 import React, { useState, useEffect } from "react";
+import DropdownButton from "./DrowdownButton";
+import PlayButton from "./PlayButton";
+import PauseButton from "./PauseButton";
+import PreviousButton from "./PreviousButton";
+import NextButton from "./NextButton";
+import Logo from "./Logo";
 
 interface Track {
   id: number;
@@ -19,6 +25,7 @@ const MusicPlayer: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [audio] = useState(new Audio());
   const [start, setStart] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState<number>(-1);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,10 +43,12 @@ const MusicPlayer: React.FC = () => {
   }, []);
 
   const playTrack = (track: Track) => {
+    const index = tracks.indexOf(track);
     setCurrentTrack(track);
     audio.src = track.preview_url;
     audio.play();
     setIsPlaying(true);
+    setCurrentIndex(index);
     console.log(track.album.images[0]);
   };
 
@@ -48,111 +57,132 @@ const MusicPlayer: React.FC = () => {
     setIsPlaying(false);
   };
 
-  const handleNext = () => {
-    if (start + 4 < tracks.length) {
-      setStart(start + 4);
-    }
-  };
-
-  const handlePrev = () => {
-    if (start - 4 >= 0) {
-      setStart(start - 4);
-    }
-  };
-
   const visibleTracks = tracks
-    .filter((track) =>
-      track.name.toLowerCase().includes(searchTerm.toLowerCase())
-    )
+    .filter((track) => {
+      const nameChars = track.name.toLowerCase().split("");
+      const searchTermChars = searchTerm.toLowerCase().split("");
+      return searchTermChars.every((char) => nameChars.includes(char));
+    })
     .slice(start, start + 4);
+
+  const playNextTrack = () => {
+    const currentTrackIndex = tracks.findIndex(
+      (track) => track.id === currentTrack?.id
+    );
+    if (currentTrackIndex !== -1 && currentTrackIndex + 1 < tracks.length) {
+      setCurrentTrack(tracks[currentTrackIndex + 1]);
+      audio.src = tracks[currentTrackIndex + 1].preview_url;
+      audio.play();
+      setIsPlaying(true);
+    }
+  };
+
+  const playPreviousTrack = () => {
+    const currentTrackIndex = tracks.findIndex(
+      (track) => track.id === currentTrack?.id
+    );
+    if (currentTrackIndex !== -1 && currentTrackIndex > 0) {
+      setCurrentTrack(tracks[currentTrackIndex - 1]);
+      audio.src = tracks[currentTrackIndex - 1].preview_url;
+      audio.play();
+      setIsPlaying(true);
+    }
+  };
 
   return (
     <div className="rounded-lg flex flex-col justify-center items-center">
+      <div className="w-full grid grid-cols-4 lg:grid-cols-4  lg:gap-4 ">
+        <div className="col-span-4 lg:col-span-1 border justify-center lg:justify-end flex items-center">
+          <Logo />
+        </div>
+        <div className=" col-span-3 lg:col-span-2 items-center flex justify-center ">
+          <p className=" rounded p-4 w-full text-center">
+            {" "}
+            <input
+              type="text"
+              placeholder="Search for a wavetrack"
+              className="p-2 border rounded-md lg:w-full"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </p>
+        </div>
+        <div className="   col-span-1 lg:col-span-1  text-white p-4 rounded items-center flex ">
+          <DropdownButton />
+        </div>
+      </div>
+
       <h1 className="text-xl font-bold mb-4 flex justify-center">
         Weekly Top Track
       </h1>
-      <div className="mb-4">
-        <input
-          type="text"
-          placeholder="Search for a wavetrack"
-          className="p-2 border rounded-md"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </div>
-      <div className="flex justify-center ">
+      <div className="flex justify-center pb-6 ">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 ">
           {visibleTracks.map((track) => (
             <div
               key={track.id}
-              className="p-1 bg-white hover:scale-125 rounded-lg border w-60 h-60 lg:w-80 lg:h-80 flex flex-col items-center justify-center"
+              className="p-1 bg-white hover:scale-125 hover:bg-black hover:text-white rounded-lg  w-30 h-30 lg:w-70 lg:h-70 flex flex-col items-center justify-center shadow-xl"
             >
-              <div className="m-2">
-                <h2 className=" font-medium text-center">{track.name}</h2>
-                <p className="text-black text-center">{track.artists}</p>
-              </div>
               <img
                 src={track.album.images[0]}
                 alt="track.images"
-                className="w-32 h-32 object-fit lg:w-48 lg:h-48"
+                className="w-32 h-32 object-fit lg:w-48 lg:h-48 p-2 rounded-lg"
                 onClick={() => playTrack(track)}
               />
-              <button
-                className="bg-green-500 text-white font-bold py-2 px-4 rounded-full my-2"
-                onClick={() => playTrack(track)}
-              >
-                Play
-              </button>
+              <div className="m-2">
+                <h2 className=" font-medium text-center">{track.name}</h2>
+                <p className=" text-center">{track.artists}</p>
+              </div>
             </div>
           ))}
         </div>
       </div>
-      <div className="mt-4 flex justify-center">
-        <button
-          className="bg-black text-white font-bold py-2 px-4 rounded-full"
-          onClick={handlePrev}
-          disabled={start === 0}
-        >
-          Prev
-        </button>
-        <button
-          className="bg-black text-white font-bold py-2 px-4 rounded-full"
-          onClick={handleNext}
-          disabled={start + 4 >= tracks.length}
-        >
-          Next
-        </button>
-      </div>
+
       {currentTrack && (
-        <div className="fixed bottom-0 w-full p-4  bg-black text-white rounded-lg mt-4 flex items-center justify-between">
-          <div className="flex items-center">
-            {currentTrack.album.images[0] && (
-              <img
-                src={currentTrack.album.images[0]}
-                alt={currentTrack.name}
-                className="w-10 h-10 object-fit lg:w-10 lg:h-10 mr-4"
-              />
-            )}
-            <h3 className="text-lg font-medium">{currentTrack.name}</h3>
+        <div className="grid grid-cols-3 fixed bottom-0 w-full p-4  bg-black text-white  mt-4  items-center justify-between">
+          <div className="cols-span-2 border">
+            <div className="flex items-center">
+              {currentTrack.album.images[0] && (
+                <img
+                  src={currentTrack.album.images[0]}
+                  alt={currentTrack.name}
+                  className="w-10 h-10 object-fit lg:w-10 lg:h-10 mr-4"
+                />
+              )}
+              <h3 className="text-lg font-medium">{currentTrack.name}</h3>
+            </div>
           </div>
-          {isPlaying ? (
+          <div className="cols-span-1 border flex justify-center">
             <button
-              className="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full"
-              onClick={pauseTrack}
+              className="bg-gray-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-full"
+              onClick={playPreviousTrack}
             >
-              Pause
+              <PreviousButton />
             </button>
-          ) : (
+            {isPlaying ? (
+              <button
+                className="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full"
+                onClick={pauseTrack}
+              >
+                <PauseButton />
+              </button>
+            ) : (
+              <button
+                className="bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full"
+                onClick={() => {
+                  audio.play();
+                  setIsPlaying(true);
+                }}
+              >
+                <PlayButton />
+              </button>
+            )}
             <button
-              className="bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full"
-              onClick={() => {
-                audio.play();
-                setIsPlaying(true);
-              }}
+              className="bg-gray-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-full"
+              onClick={playNextTrack}
             >
-              Play
+              <NextButton />
             </button>
-          )}
+          </div>
         </div>
       )}
     </div>

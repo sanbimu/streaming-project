@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../components/Navbar";
 import Content2 from "../components/Content2";
 import MusicPlayer from "../components/MusicPLayer";
 
@@ -8,9 +7,6 @@ const ShowAll: React.FC = () => {
     <>
       <div className="BgColor lg:pl-14 lg:pr-14 pb-40 ">
         <div className="bg-yellow-100 pb-10 ">
-          <div className="pb-4">
-            <Navbar />
-          </div>
           <div className="">
             <MusicPlayer />
           </div>

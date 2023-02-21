@@ -29,10 +29,8 @@ const DropdownButton = () => {
         </svg>
       </button>
       {isOpen && (
-        <ul className="w-40 absolute bg-black  rounded-lg py-2">
-          <li className="px-4 py-2 ">Option 1</li>
-          <li className="px-4 py-2 ">Option 2</li>
-          <li className="px-4 py-2 ">Option 3</li>
+        <ul className="p-4 w-20 absolute bg-black   rounded-lg ">
+          <li className="">Log out</li>
         </ul>
       )}
     </div>
