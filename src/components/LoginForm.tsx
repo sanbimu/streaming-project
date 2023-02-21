@@ -1,8 +1,21 @@
 import React, { useState } from "react";
+import axios from "axios";
+import Button from "./Button";
+import { useNavigate } from "react-router";
+
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorString, setErrorString] = useState("");
+
+  const Navigate = useNavigate();
+
+  const axiosInstance = axios.create({
+    baseURL: 'https://fullstacksoundwave.herokuapp.com',
+    timeout: 5000,
+    headers: { 'X-Custom-Header': 'value' }
+  });
 
   const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
@@ -14,11 +27,40 @@ const LoginForm = () => {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // add your login logic here
+    if(username === "" || password === ""){
+      setErrorString("Please enter username and password");
+      return;
+    }
+    else{
+      
+      axiosInstance.post('/user/login', {
+        username: username,
+        password: password
+      })
+      .then(response => {
+        //login successful
+        console.log("set token inside local storage");
+        localStorage.setItem("token", response.data.token);
+        console.log(localStorage.getItem("token"));
+        setErrorString("Success");
+        Navigate("/showall")
+      })
+      .catch(error => {
+        //login failed
+        localStorage.setItem("token", error.response.data.message);
+        console.log(error.response.data.message);
+        setErrorString(error.response.data.message);
+      });
+    }
   };
 
+  const handleForgetPassword = (e: React.FormEvent) => {
+    e.preventDefault();
+    Navigate("/ForgotPassword")
+  };
+  
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex flex-col items-center justify-center">
         <form onSubmit={handleLogin} className="px-auto">
             <div className="mb-4">
                 <label className="block color-dark-grey font-mulish tracking-wide font-bold antialiased text-opacity-90 mb-2 pl-1" htmlFor="username">
@@ -45,6 +87,13 @@ const LoginForm = () => {
                     onChange={handlePasswordInput}></input>
             </div>
       </form>
+      <div className="flex flex-col">
+        <Button id = "longTextButton" className = "w-44 h-8 items-center my-4 mx-auto mt-8" text="LOGIN" onClick={handleLogin} type="submit" />
+        <Button id = "longTextButton" className = "w-44 h-8 items-center my-4 mx-auto" text="FORGOT PASSWORD" onClick={handleForgetPassword} type="submit" />
+      </div>
+      <div>
+        <p className="text-center text-dark-grey text-sm font-raleway mx-4">{errorString}</p>
+      </div>
   </div>
   );
 };

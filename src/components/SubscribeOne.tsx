@@ -1,9 +1,22 @@
 import React, { useState } from "react";
+import Button from "../components/Button";
+import { useNavigate } from "react-router";
+import axios from 'axios';
 
 const SubscribeOne = () => {
-    const [email, setEmail] = useState("");
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorString, setErrorString] = useState("");
+  
+  const NavigateTo = useNavigate();
+
+  const axiosInstance = axios.create({
+    baseURL: 'https://fullstacksoundwave.herokuapp.com',
+    timeout: 5000,
+    headers: { 'X-Custom-Header': 'value' }
+  });
+
 
   const handleEmailInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -17,12 +30,32 @@ const SubscribeOne = () => {
     setPassword(e.target.value);
   };
 
-  const handleSubscribeOne = () => {
-    // add your forgot password logic here
+  const handleSubscribeOne = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email === "" || username === "" || password === ""){
+      setErrorString("Please fill in all the fields");
+      return;
+    }
+    else{
+      axiosInstance.post('/user/register', {
+        email: email,
+        username: username,
+        password: password
+      })
+      .then(response => {
+        console.log(response);
+        NavigateTo("/SubscribeTerms");
+      })
+      .catch(error => {
+        console.log(error.message);
+        setErrorString("Something went wrong, please try again: " + error.message);
+      });
+      
+    }
   };
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex flex-col items-center justify-center">
         <form onSubmit={handleSubscribeOne} className="px-auto">
             <div className="mb-4">
                 <label className="block color-dark-grey font-mulish tracking-wide font-bold antialiased text-opacity-90 mb-2 pl-1" htmlFor="email">
@@ -34,7 +67,7 @@ const SubscribeOne = () => {
                     type="email"
                     placeholder="Email"
                     value={email}
-                    onChange={handlePasswordInput}></input>
+                    onChange={handleEmailInput}></input>
             </div>
             <div className="mb-4">
                 <label className="block color-dark-grey font-mulish tracking-wide font-bold antialiased text-opacity-90 mb-2 pl-1" htmlFor="username">
@@ -61,6 +94,12 @@ const SubscribeOne = () => {
                     onChange={handlePasswordInput}></input>
             </div>
       </form>
+      <div className="flex flex-col">
+        <Button id = "longTextButton" className = "w-44 h-8 items-center my-4 mx-auto mt-8" text="NEXT" onClick={handleSubscribeOne} type="submit" />
+      </div>
+      <div>
+        <p className="text-center text-dark-grey text-sm font-raleway mx-4">{errorString}</p>
+      </div>
   </div>
   );
 };
