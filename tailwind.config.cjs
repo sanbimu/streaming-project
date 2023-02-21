@@ -6,10 +6,6 @@ module.exports = {
   ],
   theme: {
     screens: {
-      sm: '480px',
-      md: '768px',
-      lg: '976px',
-      xl: '1440px',
     },
     colors: {
       'dark-grey': '#202020',
@@ -20,8 +16,6 @@ module.exports = {
       'purple': '#B98AFF',
     },
     fontFamily: {
-      ubuntu: ['Ubuntu', 'sans-serif'],
-      droid: ['Droid Sans', 'sans-serif'],
       gentium: ['Gentium Book Plus', 'serif'], 
       mulish: ['Mulish', 'sans-serif'], 
       raleway: ['Raleway', 'sans-serif'],

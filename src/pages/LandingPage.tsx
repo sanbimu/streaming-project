@@ -15,7 +15,7 @@ const LandingPage = () => {
                                 <Logo />
                             </div>
                             <Button id = "CustomButton" className = "w-56 h-12 text-base items-center" text="LOGIN" linkTo="/Login" />
-                            <Button id = "CustomButton" className = "w-56 h-12 text-base items-center" text="SUBSCRIBE" linkTo="/Subscribe" />
+                            <Button id = "CustomButton" className = "w-56 h-12 items-center" text="SUBSCRIBE" linkTo="/Subscribe" />
                         </div>
                     </div>
                 </div>

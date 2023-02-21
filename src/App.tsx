@@ -17,27 +17,13 @@ return (
     <div className="content">
         <Routes>
             <Route path="/" element={<LandingPage />} />
-        </Routes>
-        <Routes>
             <Route path="/LandingPage" element={<LandingPage />} />
-        </Routes>
-        <Routes>
             <Route path="/Login" element={<Login />} />
-        </Routes>
-        <Routes>
             <Route path="/ForgotPassword" element={<ForgotPassword />} />
-        </Routes>
-        <Routes>
             <Route path="/Subscribe" element={<Subscribe />} />
-        </Routes>
-        <Routes>
             <Route path="/SubscribeTerms" element={<SubscribeTerms />} />
-        </Routes>
-        <Routes>
             <Route path="/SubscribePay" element={<SubscribePay />} />
-        </Routes>
-        <Routes>
-            <Route path="/" element={<ShowAll />} />
+            <Route path="/ShowAll" element={<ShowAll />} />
         </Routes>
     </div>
 </div>

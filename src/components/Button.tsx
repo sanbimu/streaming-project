@@ -23,7 +23,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <Link to={linkTo}>
       <button id = {id}
-        className={`${className} bg-dark-grey text-yellow font-droid font-light flex justify-center`}
+        className={`${className} bg-dark-grey text-yellow font-light flex justify-center`}
         type={type}
         onClick={onClick}
         disabled={disabled}
