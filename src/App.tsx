@@ -7,6 +7,7 @@ import ForgotPassword from './pages/ForgotPassword';
 import Subscribe from './pages/Subscribe';
 import SubscribeTerms from './pages/SubscribeTerms';
 import SubscribePay from './pages/SubscribePay';
+import ShowAll from "./pages/ShowAll";
 
 function App() {
 return (
@@ -35,7 +36,9 @@ return (
         <Routes>
             <Route path="/SubscribePay" element={<SubscribePay />} />
         </Routes>
-        
+        <Routes>
+            <Route path="/" element={<ShowAll />} />
+        </Routes>
     </div>
 </div>
 </Router>
