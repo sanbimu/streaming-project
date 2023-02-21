@@ -52,7 +52,7 @@ userSchema.methods.generateResetPasswordToken = async function () {
     await user.save();
     return token;
 };
-console.log("generateResetPasswordToken", generateResetPasswordToken)
+//console.log("generateResetPasswordToken", generateResetPasswordToken)
 
 
 // Define a static method to verify and remove a reset password token for a user
@@ -63,7 +63,7 @@ userSchema.statics.verifyAndRemoveResetPasswordToken = async function (userId, t
     }
     await resetPasswordToken.remove();
 };
-console.log("verifyAndRemoveResetPasswordToken", verifyAndRemoveResetPasswordToken)
+//console.log("verifyAndRemoveResetPasswordToken", verifyAndRemoveResetPasswordToken)
 
 // Define a static method to reset a user's password
 userSchema.statics.resetPassword = async function (token, newPassword) {
