@@ -2,21 +2,22 @@ import React from "react";
 import Content2 from "../components/Content2";
 import MusicPlayer from "../components/MusicPLayer";
 
-const ShowAll: React.FC = () => {
+const ShowAll = () => {
+
   return (
-    <>
-      <div className="BgColor lg:pl-14 lg:pr-14 pb-40 ">
-        <div className="bg-yellow-100 pb-10 ">
-          <div className="">
-            <MusicPlayer />
+      <div className="flex flex-col h-full">
+          <div className="flex-1 bg-beige">
+              <div id = "BeigeContainer" className = "bg-beige h-screen flex items-center justify-center">     
+                      <div>
+                          <MusicPlayer  />
+                      </div>
+                  </div>
+              </div>
+              <div className="bg-beige w-screen h-10 flex justify-center items-center">
+                  <Content2 />
+              </div>
           </div>
-          <div className="pb-4 ">
-            <Content2 />
-          </div>
-        </div>
-      </div>
-    </>
-  );
-};
+    );
+  };
 
 export default ShowAll;

@@ -90,7 +90,7 @@ const MusicPlayer: React.FC = () => {
   };
 
   return (
-    <div className="rounded-lg flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center items-center">
       <div className="w-full grid grid-cols-4 lg:grid-cols-4  lg:gap-4 ">
         <div className="col-span-4 lg:col-span-1 border justify-center lg:justify-end flex items-center">
           <Logo />

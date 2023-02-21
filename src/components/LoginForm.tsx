@@ -43,7 +43,7 @@ const LoginForm = () => {
         localStorage.setItem("token", response.data.token);
         console.log(localStorage.getItem("token"));
         setErrorString("Success");
-        Navigate("/showall")
+        Navigate("/ShowAll")
       })
       .catch(error => {
         //login failed
