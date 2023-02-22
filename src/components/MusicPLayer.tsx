@@ -90,24 +90,24 @@ const MusicPlayer: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center">
-      <div className="w-full grid grid-cols-4 lg:grid-cols-4  lg:gap-4 ">
-        <div className="col-span-4 lg:col-span-1 border justify-center lg:justify-end flex items-center">
+    <div className="flex flex-col mt-4 items-center">
+      <div className="w-full grid grid-cols-4 lg:grid-cols-4  ">
+        <div className="">
           <Logo />
         </div>
-        <div className=" col-span-3 lg:col-span-2 items-center flex justify-center ">
+        <div className=" col-span-2 lg:col-span-2 items-center flex justify-center ">
           <p className=" rounded p-4 w-full text-center">
             {" "}
             <input
               type="text"
               placeholder="Search for a wavetrack"
-              className="p-2 border rounded-md lg:w-full"
+              className="p-2 border rounded-md w-full"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </p>
         </div>
-        <div className="   col-span-1 lg:col-span-1  text-white p-4 rounded items-center flex ">
+        <div className=" ">
           <DropdownButton />
         </div>
       </div>
@@ -116,11 +116,11 @@ const MusicPlayer: React.FC = () => {
         Weekly Top Track
       </h1>
       <div className="flex justify-center pb-6 ">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 ">
+        <div className="grid grid-cols-4  gap-2 ">
           {visibleTracks.map((track) => (
             <div
               key={track.id}
-              className="p-1 bg-white hover:scale-125 hover:bg-black hover:text-white rounded-lg  w-30 h-30 lg:w-70 lg:h-70 flex flex-col items-center justify-center shadow-xl"
+              className="p-1 bg-white hover:scale-125 hover:bg-dark-grey hover:text-beige rounded-lg  w-30 h-30 lg:w-70 lg:h-70 flex flex-col items-center justify-center shadow-xl"
             >
               <img
                 src={track.album.images[0]}
@@ -138,7 +138,7 @@ const MusicPlayer: React.FC = () => {
       </div>
 
       {currentTrack && (
-        <div className="grid grid-cols-3 fixed bottom-0 w-full p-4  bg-black text-white  mt-4  items-center justify-between">
+        <div className="grid grid-cols-3 fixed bottom-0 w-full p-4  bg-dark-grey text-beige  mt-4  items-center justify-between">
           <div className="cols-span-2 border">
             <div className="flex items-center">
               {currentTrack.album.images[0] && (

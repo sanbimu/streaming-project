@@ -10,7 +10,7 @@ const DropdownButton = () => {
   return (
     <div className="relative">
       <button
-        className="btn text-white bg-black hover:bg-gray-400  font-bold rounded p-4"
+        className="btn text-beige bg-dark-grey hover:bg-gray-400  font-bold rounded p-4"
         onClick={toggleDropdown}
       >
         <svg
@@ -29,7 +29,7 @@ const DropdownButton = () => {
         </svg>
       </button>
       {isOpen && (
-        <ul className="p-4 w-20 absolute bg-black   rounded-lg ">
+        <ul className="p-4 w-20  bg-dark-grey   rounded-lg ">
           <li className="">Log out</li>
         </ul>
       )}
