@@ -10,7 +10,6 @@ const SubscribeOne = () => {
   const [errorString, setErrorString] = useState("");
   const [isChecked, setIsChecked] = useState(false);
 
-  
   const NavigateTo = useNavigate();
 
   const axiosInstance = axios.create({

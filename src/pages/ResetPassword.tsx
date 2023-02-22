@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Logo from '../components/Logo';
 import Footer from '../components/Footer';
-import ForgotPassForm from "../components/ForgotPassForm";
+import NewPassword from "../components/NewPassword";
 
-const ForgotPassword = () => {
+const ResetPassword = () => {
 
     return (
         <div className="flex flex-col h-full">
@@ -11,10 +11,10 @@ const ForgotPassword = () => {
                 <div id = "BeigeContainer" className = "bg-beige h-screen flex items-center justify-center">     
                     <div id = "YellowBox" className="bg-yellow bg-opacity-75 w-8/12 h-4/5 mx-auto flex items-center justify-center">
                         <div>
-                            <div className = "flex justify-center items-center mx-auto mb-20">
+                            <div className = "flex justify-center items-center mx-auto mb-24">
                                 <Logo className = "h-32"/>
                             </div>
-                                <ForgotPassForm  />
+                                <NewPassword  />
                         </div>
                     </div>
                 </div>
@@ -26,4 +26,4 @@ const ForgotPassword = () => {
       );
     };
 
-export default ForgotPassword;
+export default ResetPassword;
