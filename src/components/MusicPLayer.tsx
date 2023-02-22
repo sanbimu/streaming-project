@@ -90,12 +90,12 @@ const MusicPlayer: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col mt-4 items-center">
+    <div className="flex flex-col grid-cols-4 mt-4 items-center">
       <div className="w-full grid grid-cols-4 lg:grid-cols-4  ">
         <div className="">
           <Logo />
         </div>
-        <div className=" col-span-2 lg:col-span-2 items-center flex justify-center ">
+        <div className=" col-span-2 col-span-2 items-center flex justify-center ">
           <p className=" rounded p-4 w-full text-center">
             {" "}
             <input
@@ -116,7 +116,7 @@ const MusicPlayer: React.FC = () => {
         Weekly Top Track
       </h1>
       <div className="flex justify-center pb-6 ">
-        <div className="grid grid-cols-4  gap-2 ">
+        <div className="grid lg:grid-cols-4  gap-2 ">
           {visibleTracks.map((track) => (
             <div
               key={track.id}
