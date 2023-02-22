@@ -6,6 +6,7 @@ import './styles/components/background.css';
 import './styles/components/button.css';
 import './styles/components/questionBox.css';
 import './styles/components/login.css';
+import './styles/components/image.css';
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
