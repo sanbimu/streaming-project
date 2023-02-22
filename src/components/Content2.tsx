@@ -67,7 +67,7 @@ const Content2: React.FC = () => {
       <h1 className="text-xl font-bold mb-4 flex justify-center">Discover</h1>
 
       <div className="flex justify-center">
-        <div className="grid grid-cols-4 md:grid-cols-3 gap-2 ">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 ">
           {visibleTracks.map((track) => (
             <div
               key={track.id}

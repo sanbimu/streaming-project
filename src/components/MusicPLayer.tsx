@@ -95,7 +95,7 @@ const MusicPlayer: React.FC = () => {
         <div className="">
           <Logo />
         </div>
-        <div className=" col-span-2 col-span-2 items-center flex justify-center ">
+        <div className=" col-span-2  items-center flex justify-center ">
           <p className=" rounded p-4 w-full text-center">
             {" "}
             <input
@@ -116,11 +116,11 @@ const MusicPlayer: React.FC = () => {
         Weekly Top Track
       </h1>
       <div className="flex justify-center pb-6 ">
-        <div className="grid lg:grid-cols-4  gap-2 ">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-2 ">
           {visibleTracks.map((track) => (
             <div
               key={track.id}
-              className="p-1 bg-white hover:scale-125 hover:bg-dark-grey hover:text-beige rounded-lg  w-30 h-30 lg:w-70 lg:h-70 flex flex-col items-center justify-center shadow-xl"
+              className="p-1 bg-white hover:scale-125 hover:bg-dark-grey hover:text-beige rounded-lg  w-64 h-64 lg:w-128 lg:h-128 flex flex-col items-center justify-center shadow-xl"
             >
               <img
                 src={track.album.images[0]}
