@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Shema = mongoose.Schema;
 
 const resetPasswordTokenSchema = new mongoose.Schema({
   userId: {
