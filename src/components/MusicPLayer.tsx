@@ -116,11 +116,11 @@ const MusicPlayer: React.FC = () => {
         Weekly Top Track
       </h1>
       <div className="flex justify-center pb-6 ">
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-2 ">
+        <div className="grid grid-cols-2 lg:grid-cols-4  gap-2 ">
           {visibleTracks.map((track) => (
             <div
               key={track.id}
-              className="p-1 bg-white hover:scale-125 hover:bg-dark-grey hover:text-beige rounded-lg  w-64 h-64 lg:w-128 lg:h-128 flex flex-col items-center justify-center shadow-xl"
+              className="p-1 bg-white hover:scale-125 hover:bg-dark-grey hover:text-beige rounded-lg sm:w-32 sm:h-32 md:w-64 md:h-64 lg:w-128 lg:h-128 flex flex-col items-center justify-center shadow-xl"
             >
               <img
                 src={track.album.images[0]}
