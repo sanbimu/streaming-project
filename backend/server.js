@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const trackRoutes = require('./routes/trackRoutes');
 const userRoutes = require('./routes/userRoutes');
 const resetPasswordRoute = require('./routes/resetPasswordRoute');
+const TestPayment = require('./routes/paymentRoutes');
 const port = process.env.PORT || 3001;
 const mongoString = process.env.DATABASE_URL;
 
@@ -25,5 +26,7 @@ app.use('/track', trackRoutes);
 app.use('/user', userRoutes);
 app.use('/reset-password', resetPasswordRoute);
 app.use('/:userId/:token', resetPasswordRoute);
+app.use('/test-payment', TestPayment);
+app.use('/create-payment-intent', TestPayment);
 
 app.listen(3001, () => console.log(`Server started on port ${port}`));
