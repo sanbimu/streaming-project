@@ -8,6 +8,8 @@ const SubscribeOne = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorString, setErrorString] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
+
   
   const NavigateTo = useNavigate();
 
@@ -16,7 +18,6 @@ const SubscribeOne = () => {
     timeout: 5000,
     headers: { 'X-Custom-Header': 'value' }
   });
-
 
   const handleEmailInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -44,15 +45,22 @@ const SubscribeOne = () => {
       })
       .then(response => {
         console.log(response);
-        NavigateTo("/SubscribeTerms");
+        NavigateTo("/SubscribePay");
       })
       .catch(error => {
         console.log(error.message);
         setErrorString("Something went wrong, please try again: " + error.message);
       });
-      
     }
   };
+
+  const handleCheck = () => {
+    setIsChecked(!isChecked);
+    const errorMsg = document.getElementById("needAccept");
+    if (errorMsg) {
+      errorMsg.style.display = !isChecked ? "none" : "block";
+    }
+};
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -94,15 +102,42 @@ const SubscribeOne = () => {
                     onChange={handlePasswordInput}></input>
             </div>
       </form>
-      <div className="flex flex-col">
-        <Button id = "longTextButton" className = "w-44 h-8 items-center my-4 mx-auto mt-8" text="NEXT" onClick={handleSubscribeOne} type="submit" />
+      <div className="flex items-center justify-items-center font-raleway font-lighter text-base leading-relaxed my-1">
+            <input 
+                type="checkbox" 
+                id="acceptTerms" 
+                checked={isChecked} 
+                onChange={handleCheck}
+                className="mr-2" />
+            <label htmlFor="acceptTerms" className="text-dark-grey text-sm">I accept the <a href="/SubscribeTerms" style={{ textDecoration: 'underline' }}>terms and conditions</a></label>
+      </div>
+      <div className="flex flex-col pt-4 pb-4">
+      <Button 
+        onClick={handleSubscribeOne}
+        id = "longTextButton" 
+        className = "w-44 h-8 items-center mt-2 mb-4 mx-auto" 
+        text="NEXT" 
+        type="submit" 
+        disabled={!isChecked} 
+      />
       </div>
       <div>
-        <p className="text-center text-dark-grey text-sm font-raleway mx-4">{errorString}</p>
+        <p 
+        className="text-center text-orange font-bold text-sm font-raleway mx-4">
+        {errorString}
+        </p>
+        <p 
+        id= "needAccept" 
+        className="text-center text-orange font-bold text-sm font-raleway mx-4">
+        Please accept the terms and conditions.
+        </p>
       </div>
   </div>
   );
 };
 
 export default SubscribeOne;
+
+
+
 
