@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const trackRoutes = require('./routes/trackRoutes');
+const artistRoutes = require('./routes/artistRoutes');
 const userRoutes = require('./routes/userRoutes');
 const resetPasswordRoute = require('./routes/resetPasswordRoute');
 const TestPayment = require('./routes/paymentRoutes');
@@ -28,5 +29,6 @@ app.use('/reset-password', resetPasswordRoute);
 app.use('/:userId/:token', resetPasswordRoute);
 app.use('/test-payment', TestPayment);
 app.use('/create-payment-intent', TestPayment);
+app.use('/artist', artistRoutes);
 
 app.listen(3001, () => console.log(`Server started on port ${port}`));
