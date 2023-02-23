@@ -20,7 +20,7 @@ const artistSchema = new Schema({
     },
     id: {
         type: String,
-        required: true,
+        required: false,
     },
     images: {
         type: Array,

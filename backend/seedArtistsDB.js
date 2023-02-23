@@ -43,13 +43,22 @@ const Damso = "2UwqpfQtNuhBwviIC0f2ie";
             headers: { 'Authorization': 'Bearer ' + token }
         });
         const data = await result.json();
-        console.log("artists: ", data);
+        
         return data;
     }
 
     getArtists(await getToken());
+    const artists = await getArtists(await getToken());
+    console.log("artists: ", artists.artists[3]);
 
     //save the artists in the database
+    // const seedArtists = async () => {
+    //     await artistModel.deleteMany({});
+    //     await artistModel.insertMany(artists.artists);
+    //     console.log("database seeded with artists");
+    // }
+    // seedArtists().then(() => database.close());
+
 
 
 })();
