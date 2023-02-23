@@ -10,12 +10,13 @@ module.exports = {
       "2xl": "1536px",
     },
     colors: {
-      "dark-grey": "#202020",
-      beige: "#F7F2EC",
-      yellow: "#FFDA8A",
-      "light-yellow": "#ffeabd",
-      red: "#ffa08a",
-      purple: "#B98AFF",
+      'dark-grey': '#202020',
+      'beige': '#f7f2ec',
+      'yellow': '#ffda8a',
+      'light-yellow': '#ffeabd',
+      'red': '#ffa08a',
+      'purple': '#b98aff',
+      'orange': '#eb6c4a'
     },
     fontFamily: {
       gentium: ["Gentium Book Plus", "serif"],
