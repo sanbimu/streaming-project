@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    
+    "start": "/backend/server.js",
     "preview": "vite preview"
   },
   "dependencies": {
