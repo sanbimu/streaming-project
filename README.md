@@ -1,28 +1,21 @@
 ## Wave Music Streaming 
 
-## The Team
+## Description
 
-Frontend: [Ronnie James](https://github.com/ronniejamestorres), [Nathalie](https://github.com/sanbimu) 
+Wave is a music streaming platform offering users access to a vast library of music from various artists and genres. To access the Wave catalog, users must register, pay for their subscription, and log in.
+
+![] (landingpage.png) 
 <br>
-Backend: [Jo](https://github.com/buidlor), [Loic](https://github.com/LoicFrancotte)
-
-## The Project
-
-![](project1.png) 
+![](subsribepage.png) 
 <br>
-![](project2.png) 
-
-
-We are developing a music streaming platform similar to Spotify, offering users access to a vast library of music from various artists and genres.
-<br>
-Our platform will provide playlists, and rating features to enhance the user experience. 
-<br>
-We aim to offer a seamless and enjoyable listening experience across multiple devices, including web and mobile.
+![](mainpage.png) 
 
 ## Technologies
 
-`React`, `Vite`, `Typescript`, `Tailwind`, `Axios`, `MongoDB`, `NodeJs-Express`, `Mongoose`
+`React`, `Vite`, `Typescript`, `Tailwind`, `Axios`, `NodeJs-Express`, `MongoDB`, `Mongoose`
 
 ## Sources
 
-Spotify API 
+[Spotify API ](https://developer.spotify.com/documentation/web-api/)
+[Dribbble](https://dribbble.com/shots/15433063-Wave-Music-Streaming-Dashboard)
+
