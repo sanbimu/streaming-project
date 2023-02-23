@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import Button from "./Button";
 
+
 const Payment = () => {
+
 
   return (
     <div>

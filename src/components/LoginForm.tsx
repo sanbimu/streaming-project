@@ -12,7 +12,7 @@ const LoginForm = () => {
   const Navigate = useNavigate();
 
   const axiosInstance = axios.create({
-    baseURL: 'https://fullstacksoundwave.herokuapp.com',
+    baseURL: 'https://backwave.herokuapp.com/',
     timeout: 5000,
     headers: { 'X-Custom-Header': 'value' }
   });

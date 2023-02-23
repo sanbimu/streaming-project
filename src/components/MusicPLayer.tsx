@@ -95,12 +95,12 @@ const MusicPlayer: React.FC = () => {
         <div className="w-20  col-span-1 lg:justify-center flex ">
           <Logo />
         </div>
-        <div className="  col-span-2  items-center flex justify-center ">
-          <p className=" rounded p-4 w-full text-center">
+        <div className="col-span-2  items-center flex justify-center ">
+          <p className="font-raleway rounded p-4 w-full text-center">
             {" "}
             <input
               type="text"
-              placeholder="Search for a wavetrack"
+              placeholder="Search for a Wave track"
               className="p-2   rounded-md w-full"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -112,8 +112,8 @@ const MusicPlayer: React.FC = () => {
         </div>
       </div>
 
-      <h1 className="text-xl font-bold mb-4 mt-10 flex justify-center">
-        Weekly Top Track
+      <h1 className="font-ubuntu text-xl font-bold mb-4 mt-10 flex justify-center">
+        Weekly Top Tracks
       </h1>
       <div className="flex justify-center pb-6 ">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4  gap-2 ">
@@ -129,8 +129,8 @@ const MusicPlayer: React.FC = () => {
                 onClick={() => playTrack(track)}
               />
               <div className="p-2 text-clip overflow-hidden">
-                <h2 className=" font-medium text-center">{track.name}</h2>
-                <p className=" text-center ">{track.artists}</p>
+                <h2 className="font-raleway font-medium text-center">{track.name}</h2>
+                <p className="font-raleway text-center ">{track.artists}</p>
               </div>
             </div>
           ))}
@@ -211,25 +211,24 @@ const MusicPlayer: React.FC = () => {
         }
       `}</style>
           </div>
-
           <div className="col-span-2  items-center justify-center flex ">
-            <input
-              type="range"
-              min="0"
-              max="1"
-              step="0.01"
-              value={audio.volume}
-              onChange={(e) => {
-                audio.volume = e.target.value;
-              }}
-              className="h-2 mx-4 w-3/4 "
-              style={{
-                appearance: "none",
-                background: "#F7F2EC",
-                outline: "none",
-                borderRadius: "5px",
-              }}
-            />
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            value={audio.volume}
+            onChange={(e) => {
+            audio.volume = parseFloat(e.target.value);
+          }}
+            className="h-2 mx-4 w-3/4 "
+            style={{
+            appearance: "none",
+            background: "#F7F2EC",
+            outline: "none",
+            borderRadius: "5px",
+          }}
+          />
           </div>
         </div>
       )}
