@@ -1,5 +1,3 @@
-const { use } = require("../routes/trackRoutes")
-
 const button = document.querySelector("button")
 button.addEventListener("click", () => {
   fetch("http://localhost:3001/create-checkout-session", {

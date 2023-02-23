@@ -57,7 +57,7 @@ app.post('/create-checkout-session', async (req, res) => {
 
     // Update user subscription status
     await User.findOneAndUpdate(
-      { email: User.email },
+      { email: "loic880@hotmail.com" },
       { isSubscribe: true }
     );
 
