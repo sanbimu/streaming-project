@@ -31,7 +31,7 @@ const MusicPlayer: React.FC = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://fullstacksoundwave.herokuapp.com/track/getAll"
+          "https://backwave.herokuapp.com/track/getall"  
         );
         const data = await response.json();
         setTracks(data);

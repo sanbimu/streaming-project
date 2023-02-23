@@ -13,7 +13,7 @@ const SubscribeOne = () => {
   const NavigateTo = useNavigate();
 
   const axiosInstance = axios.create({
-    baseURL: 'https://fullstacksoundwave.herokuapp.com',
+    baseURL: 'https://backwave.herokuapp.com/',
     timeout: 5000,
     headers: { 'X-Custom-Header': 'value' }
   });
@@ -32,12 +32,13 @@ const SubscribeOne = () => {
 
   const handleSubscribeOne = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("button clicked");
     if (email === "" || username === "" || password === ""){
       setErrorString("Please fill in all the fields");
       return;
     }
     else{
-      axiosInstance.post('/user/register', {
+      axiosInstance.post('/user/signup', {
         email: email,
         username: username,
         password: password

@@ -4,22 +4,42 @@ import Button from "../components/Button";
 import { useNavigate } from "react-router";
 
 const NewPassword= () => {
-  const [password, setPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [errorString, setErrorString] = useState("");
 
   const NavigateTo = useNavigate();
 
   const axiosInstance = axios.create({
-    baseURL: 'https://fullstacksoundwave.herokuapp.com',
+    baseURL: 'https://backwave.herokuapp.com/',
     timeout: 5000,
     headers: { 'X-Custom-Header': 'value' }
   });
 
   const handlePasswordInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
+    setNewPassword(e.target.value);
   };
 
   const handleNewPassword = () => {
     // add your forgot password logic here
+    console.log("button clicked");
+    if (newPassword === ""){
+      setErrorString("Please fill in all the fields");
+      return;
+    }else{
+      axiosInstance.post('/reset-password', {
+        password: newPassword
+      })
+      .then(response => {
+        console.log(response);
+        NavigateTo("/Login");
+      })
+      .catch(error => {
+        console.log(error.message);
+        setErrorString("Something went wrong, please try again: " + error.message);
+      });
+    }
+
+    
   };
 
   return (

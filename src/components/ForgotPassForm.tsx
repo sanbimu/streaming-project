@@ -7,11 +7,12 @@ import { useNavigate } from "react-router";
 
 const ForgotPassForm= () => {
   const [email, setEmail] = useState("");
+  const [errorString, setErrorString] = useState("");
 
   const NavigateTo = useNavigate();
 
   const axiosInstance = axios.create({
-    baseURL: 'https://fullstacksoundwave.herokuapp.com',
+    baseURL: 'https://backwave.herokuapp.com/',
     timeout: 5000,
     headers: { 'X-Custom-Header': 'value' }
   });
@@ -22,6 +23,24 @@ const ForgotPassForm= () => {
 
   const handleResetPassword = () => {
     // add your forgot password logic here
+    console.log("button clicked");
+    if (email === ""){
+      setErrorString("Please fill in all the fields");
+      return;
+    }else{
+      axiosInstance.post('/reset-password', {
+        email: email,
+      })
+      .then(response => {
+        console.log(response);
+        NavigateTo("/ResetPassword");
+      })
+      .catch(error => {
+        console.log(error.message);
+        setErrorString("Something went wrong, please try again: " + error.message);
+      });
+
+    }
   };
 
   return (
@@ -47,6 +66,7 @@ const ForgotPassForm= () => {
         text="RESET PASSWORD" 
         type="submit" 
       />
+      <div className="text-red-500">{errorString}</div>
   </div>
   );
 };

@@ -3,9 +3,10 @@ import Logo from '../components/Logo';
 import Button from '../components/Button';
 import Questions from '../components/Questions';
 import Footer from '../components/Footer';
+import { useNavigate } from "react-router";
 
 const LandingPage = () => {
-    
+    const Navigate = useNavigate();
     const [isChecked, setIsChecked] = useState(false);
 
     const handleCheck = () => {
@@ -16,6 +17,13 @@ const LandingPage = () => {
         setIsChecked(true);
       };
 
+      const clickLogin = () => {
+        Navigate("/Login");
+    }   
+      const clickSubscribe = () => {
+        Navigate("/Subscribe");
+    }   
+
     return (
         <div className="flex flex-col h-full">
             <div className="flex-1 bg-beige">
@@ -25,8 +33,8 @@ const LandingPage = () => {
                             <div className = "flex justify-center items-center mx-auto mt-14 mb-24">
                                 <Logo />
                             </div>
-                            <Button id = "CustomButton" className = "w-56 h-12 text-base items-center" text="LOGIN" linkTo="/Login" />
-                            <Button id = "CustomButton" className = "w-56 h-12 items-center" text="SUBSCRIBE" linkTo="/Subscribe" />
+                            <Button id = "CustomButton" className = "w-56 h-12 text-base items-center" text="LOGIN" onClick={clickLogin} />
+                            <Button id = "CustomButton" className = "w-56 h-12 items-center" text="SUBSCRIBE" onClick={clickSubscribe}/>
                         </div>
                     </div>
                         <div id="Cookies" className = "bg-dark-grey flex fixed right-1 bottom-1 p-2 m-1 w-2/5">

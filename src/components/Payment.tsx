@@ -3,6 +3,36 @@ import Button from "./Button";
 
 const Payment = () => {
 
+  const handlePayment = () => {
+    console.log("button payment clicked");
+
+
+  fetch("https://backwave.herokuapp.com/create-checkout-session", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      items: [
+        { id: 1, quantity: 1 }
+      ],
+    }),
+  })
+    .then(async res => {
+      if (res.ok) return res.json()
+      const json = await res.json()
+      return await Promise.reject(json)
+    })
+    .then(({ url }) => {
+      window.location = url
+    })
+    .catch(e => {
+      console.error(e.error)
+    })
+}
+
+  
+
   return (
     <div>
         <div className="w-10/12 h-96 p-4 mx-auto overflow-y-auto">
@@ -12,7 +42,7 @@ const Payment = () => {
             If you decide to cancel, please be aware that the cancellation will take effect at the end of your current billing period. 
             This means that you will retain access to Wave until the end of the current period, but will not be charged again in the future</p>
         </div>
-            <Button id = "longTextButton" className = "w-44 h-8 items-center my-4 mx-auto mt-8" text="TO PAYMENT" type="submit" />
+            <Button id = "longTextButton" className = "w-44 h-8 items-center my-4 mx-auto mt-8" text="TO PAYMENT" type="submit" onClick={handlePayment}/>
     </div>
   );
 };
