@@ -31,4 +31,4 @@ app.use('/test-payment', TestPayment);
 app.use('/create-payment-intent', TestPayment);
 app.use('/artist', artistRoutes);
 
-app.listen(3001, () => console.log(`Server started on port ${port}`));
+app.listen(port, () => console.log(`Server started on port ${port}`));
