@@ -1,6 +1,6 @@
-
+/* 
 #BeigeContainer {
-    background-image: url('./backgroundbigw.jpg');
+    background-image: url('../../../public/backgroundbigw.jpg');
     background-size: 100% 60%;
     background-repeat: no-repeat;
     background-position: center;
@@ -8,6 +8,6 @@
 
 @media only screen and (max-width: 820px) {
     #BeigeContainer {
-    background-image: url('./backgroundsmallw.jpg');
+    background-image: url('../../../public/backgroundsmallw.jpg');
     }
-  }
+  } */

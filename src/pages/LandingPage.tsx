@@ -4,10 +4,20 @@ import Button from '../components/Button';
 import Questions from '../components/Questions';
 import Footer from '../components/Footer';
 import { useNavigate } from "react-router";
+import bgIMG from '../../public/backgroundbigw.jpg'
 
 const LandingPage = () => {
     const Navigate = useNavigate();
     const [isChecked, setIsChecked] = useState(false);
+
+    const bgStyle = {
+        backgroundImage: `url(${bgIMG})`,
+        backgroundSize: '100% 60%',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center'
+      };
+
+    
 
     const handleCheck = () => {
         const cookiesDiv = document.getElementById("Cookies");
@@ -27,7 +37,7 @@ const LandingPage = () => {
     return (
         <div className="flex flex-col h-full">
             <div className="flex-1 bg-beige">
-                <div id = "BeigeContainer" className = "bg-beige h-screen flex items-center justify-center relative">
+                <div id = "BeigeContainer" className = "bg-beige h-screen flex items-center justify-center relative" style={bgStyle}>
                     <div id="YellowBox" className="bg-yellow bg-opacity-75 w-8/12 lg:w-5/12 h-4/5 mx-auto flex items-center justify-center">
                         <div>
                             <div className = "flex justify-center items-center mx-auto mt-14 mb-24">
