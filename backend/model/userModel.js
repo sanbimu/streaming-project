@@ -39,7 +39,11 @@ const userSchema = new Schema({
     favTracks: {
         type: Array,
         required: false
-    }
+    },
+    isSubscribe: {
+        type: Boolean,
+        default: false
+    },
 });
 
 
@@ -48,7 +52,7 @@ userSchema.methods.generateResetPasswordToken = async function () {
     const user = this;
     const token = crypto.randomBytes(20).toString("hex");
     user.resetPasswordToken = token;
-    user.resetTokenExpires = Date.now() + 36000000; // 1 hour
+    user.resetTokenExpires = Date.now() + 36000000; // 10 hour
     await user.save();
     return token;
 };
@@ -68,10 +72,8 @@ userSchema.statics.verifyAndRemoveResetPasswordToken = async function (userId, t
 // Define a static method to reset a user's password
 userSchema.statics.resetPassword = async function (token, newPassword) {
     // Find the reset password token
-   
-    
     const resetPasswordToken = await this.findOne({ resetPasswordToken: token });
- 
+
     if (!resetPasswordToken) {
         throw new Error('Invalid or expired reset password token, ON GALERATE ICI ');
     }
@@ -94,7 +96,6 @@ userSchema.statics.resetPassword = async function (token, newPassword) {
     user.resetTokenExpires = undefined;
     await user.save();
 
-    
 };
 
 // Create the User model and export it
