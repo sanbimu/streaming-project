@@ -90,17 +90,17 @@ const MusicPlayer: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col lg:w-3/4 md:w-3/4 mt-4 items-center ">
-      <div className="w-full grid grid-cols-4 lg:grid-cols-4 items-center justify-center ">
-        <div className="w-20 col-span-1 lg:justify-center flex ">
+    <div className="flex flex-col lg:w-3/4 md:w-3/4  mt-4 items-center ">
+      <div className="w-full grid grid-cols-5 lg:grid-cols-4 items-center  justify-center ">
+        <div className="w-20  col-span-1 lg:justify-center flex ">
           <Logo />
         </div>
         <div className="  col-span-2  items-center flex justify-center ">
-          <p className=" font-raleway rounded p-4 w-full text-center">
+          <p className=" rounded p-4 w-full text-center">
             {" "}
             <input
               type="text"
-              placeholder="Search for a Wave track"
+              placeholder="Search for a wavetrack"
               className="p-2   rounded-md w-full"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -112,15 +112,15 @@ const MusicPlayer: React.FC = () => {
         </div>
       </div>
 
-      <h1 className="text-xl font-ubuntu font-bold mb-4 mt-10 flex justify-center">
-        Weekly Top Tracks
+      <h1 className="text-xl font-bold mb-4 mt-10 flex justify-center">
+        Weekly Top Track
       </h1>
       <div className="flex justify-center pb-6 ">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4  gap-2 ">
           {visibleTracks.map((track) => (
             <div
               key={track.id}
-              className="font-raleway p-1 bg-white hover:scale-125 hover:bg-dark-grey hover:text-beige rounded-lg  w-30 h-30 lg:w-60 lg:h-70 flex flex-col items-center justify-center shadow-xl "
+              className="p-1 bg-white hover:scale-125 hover:bg-dark-grey hover:text-beige rounded-lg  w-30 h-30 lg:w-60 lg:h-70 flex flex-col items-center justify-center shadow-xl "
             >
               <img
                 src={track.album.images[0]}
@@ -138,8 +138,8 @@ const MusicPlayer: React.FC = () => {
       </div>
 
       {currentTrack && (
-        <div className="grid grid-cols-3 fixed bottom-0 w-full p-4 bg-dark-grey text-beige mt-4 items-center justify-between">
-          <div className="cols-span-2">
+        <div className="grid grid-cols-5  fixed bottom-0 w-full p-4 bg-dark-grey text-beige mt-4 items-center justify-between">
+          <div className="col-span-1 lg:col-span-1  ">
             <div className="flex items-center">
               {currentTrack.album.images[0] && (
                 <img
@@ -149,12 +149,13 @@ const MusicPlayer: React.FC = () => {
                 />
               )}
               <div>
-                <h3 className="font-raleway text-lg font-medium">{currentTrack.name}</h3>
-                <p className="text-yellow font-raleway ">{currentTrack.artists}</p>
+                <h3 className="text-lg font-medium">{currentTrack.name}</h3>
+                <p className="text-yellow ">{currentTrack.artists}</p>
               </div>
             </div>
           </div>
-          <div className="cols-span-1 flex justify-center items-center">
+
+          <div className="cols-span-1 flex justify-start items-center ">
             <button
               className="bg-gray-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-full hover:scale-50 text-yellow"
               onClick={playPreviousTrack}
@@ -180,13 +181,15 @@ const MusicPlayer: React.FC = () => {
               </button>
             )}
             <button
-              className="bg-gray-500 hover:bg-gray-800 text-white font-bold font-raleway py-2 px-4 rounded-full hover:scale-50 text-yellow"
+              className="bg-gray-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-full hover:scale-50 text-yellow"
               onClick={playNextTrack}
             >
               <NextButton />
             </button>
+          </div>
+          <div className="col-span-1 flex justify-center items-center ">
             <progress
-              className="w-full h-2 relative"
+              className="w-full h-2 "
               value={audio.currentTime}
               max={audio.duration}
               style={{
@@ -195,18 +198,38 @@ const MusicPlayer: React.FC = () => {
               }}
             />
             <style>{`
-  progress::-webkit-progress-bar {
-    background-color: #F7F2EC;
-  }
-  progress::-webkit-progress-value {
-    background-color: #FFDA8A;
-    border-radius: 5px;
-  }
-  progress::-moz-progress-bar {
-    background-color: #FFDA8A;
-    border-radius: 5px;
-  }
-`}</style>
+        progress::-webkit-progress-bar {
+          background-color: #F7F2EC;
+        }
+        progress::-webkit-progress-value {
+          background-color: #FFDA8A;
+          border-radius: 5px;
+        }
+        progress::-moz-progress-bar {
+          background-color: #FFDA8A;
+          border-radius: 5px;
+        }
+      `}</style>
+          </div>
+
+          <div className="col-span-2  items-center justify-center flex ">
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value={audio.volume}
+              onChange={(e) => {
+                audio.volume = e.target.value;
+              }}
+              className="h-2 mx-4 w-3/4 "
+              style={{
+                appearance: "none",
+                background: "#F7F2EC",
+                outline: "none",
+                borderRadius: "5px",
+              }}
+            />
           </div>
         </div>
       )}
