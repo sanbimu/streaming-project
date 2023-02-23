@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const trackRoutes = require('./routes/trackRoutes');
+const artistRoutes = require('./routes/artistRoutes');
 const userRoutes = require('./routes/userRoutes');
 const resetPasswordRoute = require('./routes/resetPasswordRoute');
 const port = process.env.PORT || 3001;
@@ -12,12 +13,14 @@ const User = require('./model/userModel');
 
 const app = express();
 
+// Start server
 app.use(cors());
 app.use(express.json());
 app.use('/track', trackRoutes);
 app.use('/user', userRoutes);
 app.use('/reset-password', resetPasswordRoute);
 app.use('/:userId/:token', resetPasswordRoute);
+app.use('/artist', artistRoutes);
 
 app.use(express.json())
 app.use(express.static('public'))
@@ -65,4 +68,6 @@ app.post('/create-checkout-session', async (req, res) => {
 });
 
 // Start server
+app.use('/artist', artistRoutes);
+
 app.listen(port, () => console.log(`Server started on port ${port}`));

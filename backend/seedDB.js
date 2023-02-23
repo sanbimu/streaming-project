@@ -35,6 +35,7 @@ app.listen(3000, () => console.log(`Server started on port ${3000}`));
         const data = await result.json();
         return data.access_token;
     }
+    console.log("token: ", await getToken());
 
     //2. get genres from spotify API
     const getGenres = async (token) => {
@@ -46,7 +47,7 @@ app.listen(3000, () => console.log(`Server started on port ${3000}`));
         return data.categories.items;
     }
     const genres = await getGenres(await getToken());
-   
+    console.log("genres: ", genres);
    
 
     //3. get playlist from spotify API
@@ -62,7 +63,7 @@ app.listen(3000, () => console.log(`Server started on port ${3000}`));
     //save playlists in the array
     const playlist = await getPlaylist(await getToken(), genres[4].id);
     const playlistDance = await getPlaylist(await getToken(), genres[5].id);
-    
+  
     
 
 
@@ -77,7 +78,7 @@ app.listen(3000, () => console.log(`Server started on port ${3000}`));
         return data.items;
     }
 
-
+    
     //5. create an array with all the tracks from the hiphop playlists
     const tracks = [];
     for (let i = 0; i < playlist.length; i++) {
@@ -129,14 +130,14 @@ app.listen(3000, () => console.log(`Server started on port ${3000}`));
 
 
    //6 save the tracks in the database
-   const seedDB = async () => {
-        await trackModel.deleteMany({});
-        await trackModel.insertMany(uniqueTracksPreview);
-        console.log("Database seeded");
-    }
-    seedDB().then(() => {
-        database.close();
-    });
+//    const seedDB = async () => {
+//         await trackModel.deleteMany({});
+//         await trackModel.insertMany(uniqueTracksPreview);
+//         console.log("Database seeded");
+//     }
+//     seedDB().then(() => {
+//         database.close();
+//     });
 
     
     
