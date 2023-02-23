@@ -91,8 +91,8 @@ const MusicPlayer: React.FC = () => {
 
   return (
     <div className="flex flex-col lg:w-3/4 md:w-3/4  mt-4 items-center ">
-      <div className="w-full grid grid-cols-5 lg:grid-cols-4 items-center  justify-center ">
-        <div className="w-20  col-span-1 lg:justify-center flex ">
+      <div className="w-full grid grid-cols-4 lg:grid-cols-4 items-center   justify-center ">
+        <div className="w-20  col-span-1 justify-center items-center lg:justify-center flex ">
           <Logo />
         </div>
         <div className="  col-span-2  items-center flex justify-center ">
@@ -138,7 +138,7 @@ const MusicPlayer: React.FC = () => {
       </div>
 
       {currentTrack && (
-        <div className="grid grid-cols-5  fixed bottom-0 w-full p-4 bg-dark-grey text-beige mt-4 items-center justify-between">
+        <div className="grid grid-cols-2  lg:grid-cols-5  fixed bottom-0 w-full p-4 bg-dark-grey text-beige mt-4 items-center justify-between">
           <div className="col-span-1 lg:col-span-1  ">
             <div className="flex items-center">
               {currentTrack.album.images[0] && (
@@ -149,7 +149,9 @@ const MusicPlayer: React.FC = () => {
                 />
               )}
               <div>
-                <h3 className="text-lg font-medium">{currentTrack.name}</h3>
+                <h3 className="text-sm lg:text-lg font-medium">
+                  {currentTrack.name}
+                </h3>
                 <p className="text-yellow ">{currentTrack.artists}</p>
               </div>
             </div>
@@ -187,7 +189,7 @@ const MusicPlayer: React.FC = () => {
               <NextButton />
             </button>
           </div>
-          <div className="col-span-1 flex justify-center items-center ">
+          <div className="col-span-2 mt-4 lg:col-span-1 flex justify-center items-center ">
             <progress
               className="w-full h-2 "
               value={audio.currentTime}
@@ -212,7 +214,7 @@ const MusicPlayer: React.FC = () => {
       `}</style>
           </div>
 
-          <div className="col-span-2  items-center justify-center flex ">
+          <div className="col-span-2 lg:col-span-2 invisible md:visible lg:visible items-center justify-center flex ">
             <input
               type="range"
               min="0"

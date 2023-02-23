@@ -87,7 +87,7 @@ const Content2: React.FC = () => {
       </div>
 
       <button
-        className="font-raleway bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full mt-4"
+        className="font-raleway bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full mt-4 mb-10 border "
         onClick={loadMoreTracks}
       >
         Load More
