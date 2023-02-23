@@ -6,7 +6,7 @@ Wave is a music streaming platform offering users access to a vast library of mu
 
 ![] (landingpage.png) 
 <br>
-![](subsribepage.png) 
+![](subscribepage.png) 
 <br>
 ![](mainpage.png) 
 
@@ -17,5 +17,6 @@ Wave is a music streaming platform offering users access to a vast library of mu
 ## Sources
 
 [Spotify API ](https://developer.spotify.com/documentation/web-api/)
+<br>
 [Dribbble](https://dribbble.com/shots/15433063-Wave-Music-Streaming-Dashboard)
 
