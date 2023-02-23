@@ -39,7 +39,7 @@ app.use(express.json());
 // Route to create a Stripe checkout session
 app.post('/create-checkout-session', async (req, res) => {
   const { email } = req.body;
-
+    console.log(email)
   try {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -70,4 +70,7 @@ app.post('/create-checkout-session', async (req, res) => {
 // Start server
 app.use('/artist', artistRoutes);
 
-app.listen(port, () => console.log(`Server started on port ${port}`));
+app.listen(port, () => {
+    console.log(`Server started on port ${port}`)
+    //console.log(User.find({email: "loic880@hotmail.com"}))
+});
