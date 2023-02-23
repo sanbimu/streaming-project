@@ -38,7 +38,7 @@ app.use(express.json());
 
 // Route to create a Stripe checkout session
 app.post('/create-checkout-session', async (req, res) => {
-  const { email } = req.body;
+  const email = req.body.email;
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -57,9 +57,9 @@ app.post('/create-checkout-session', async (req, res) => {
 
     // Update user subscription status
     await User.findOneAndUpdate(
-      { email: "loic880@hotmail.com" },
+      { email: email },
       { isSubscribe: true }
-    );
+    ).exec();
 
     res.json({ url: session.url });
   } catch (error) {
