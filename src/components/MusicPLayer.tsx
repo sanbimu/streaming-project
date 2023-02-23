@@ -5,6 +5,7 @@ import PauseButton from "./PauseButton";
 import PreviousButton from "./PreviousButton";
 import NextButton from "./NextButton";
 import Logo from "./Logo";
+import { ChangeEvent, useRef } from 'react';
 
 interface Track {
   id: number;
@@ -13,6 +14,9 @@ interface Track {
   duration: number;
   url: string;
   preview_url: string;
+  audio: {
+    volume: number;
+  }
   album: {
     images: string[];
   };
@@ -219,8 +223,8 @@ const MusicPlayer: React.FC = () => {
               max="1"
               step="0.01"
               value={audio.volume}
-              onChange={(e) => {
-                audio.volume = e.target.value;
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                audio.volume = parseFloat(e.target.value);
               }}
               className="h-2 mx-4 w-3/4 "
               style={{

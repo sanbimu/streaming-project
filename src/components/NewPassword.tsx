@@ -54,7 +54,7 @@ const NewPassword= () => {
                     id="password"
                     type="password"
                     placeholder="Password"
-                    value={password}
+                    value={newPassword}
                     onChange={handlePasswordInput}></input>
             </div>
       </form>
