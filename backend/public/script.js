@@ -1,6 +1,8 @@
+require('dotenv').config();
+
 const button = document.querySelector("button")
 button.addEventListener("click", () => {
-  fetch("http://localhost:3001/create-checkout-session", {
+  fetch(`${process.env.CLIENT_URL}/create-checkout-session`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -12,6 +14,7 @@ button.addEventListener("click", () => {
     }),
   })
     .then(async res => {
+      console.log("ressuie : test réussi")
       if (res.ok) return res.json()
       const json = await res.json()
       return await Promise.reject(json)
