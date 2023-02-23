@@ -90,37 +90,37 @@ const MusicPlayer: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col mt-4 items-center">
-      <div className="w-full grid grid-cols-4 lg:grid-cols-4  ">
-        <div className="">
+    <div className="flex flex-col lg:w-3/4 md:w-3/4  mt-4 items-center ">
+      <div className="w-full grid grid-cols-4 lg:grid-cols-4 items-center   justify-center ">
+        <div className="w-20  col-span-1 lg:justify-center flex ">
           <Logo />
         </div>
-        <div className=" col-span-2 lg:col-span-2 items-center flex justify-center ">
+        <div className="  col-span-2  items-center flex justify-center ">
           <p className=" rounded p-4 w-full text-center">
             {" "}
             <input
               type="text"
               placeholder="Search for a wavetrack"
-              className="p-2 border rounded-md w-full"
+              className="p-2   rounded-md w-full"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </p>
         </div>
-        <div className=" ">
+        <div className="col-span-1 justify-center flex ">
           <DropdownButton />
         </div>
       </div>
 
-      <h1 className="text-xl font-bold mb-4 flex justify-center">
+      <h1 className="text-xl font-bold mb-4 mt-10 flex justify-center">
         Weekly Top Track
       </h1>
       <div className="flex justify-center pb-6 ">
-        <div className="grid grid-cols-4  gap-2 ">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4  gap-2 ">
           {visibleTracks.map((track) => (
             <div
               key={track.id}
-              className="p-1 bg-white hover:scale-125 hover:bg-dark-grey hover:text-beige rounded-lg  w-30 h-30 lg:w-70 lg:h-70 flex flex-col items-center justify-center shadow-xl"
+              className="p-1 bg-white hover:scale-125 hover:bg-dark-grey hover:text-beige rounded-lg  w-30 h-30 lg:w-60 lg:h-70 flex flex-col items-center justify-center shadow-xl "
             >
               <img
                 src={track.album.images[0]}
@@ -128,9 +128,9 @@ const MusicPlayer: React.FC = () => {
                 className="w-32 h-32 object-fit lg:w-48 lg:h-48 p-2 rounded-lg"
                 onClick={() => playTrack(track)}
               />
-              <div className="m-2">
+              <div className="p-2 text-clip overflow-hidden">
                 <h2 className=" font-medium text-center">{track.name}</h2>
-                <p className=" text-center">{track.artists}</p>
+                <p className=" text-center ">{track.artists}</p>
               </div>
             </div>
           ))}
@@ -138,8 +138,8 @@ const MusicPlayer: React.FC = () => {
       </div>
 
       {currentTrack && (
-        <div className="grid grid-cols-3 fixed bottom-0 w-full p-4  bg-dark-grey text-beige  mt-4  items-center justify-between">
-          <div className="cols-span-2 border">
+        <div className="grid grid-cols-3 fixed bottom-0 w-full p-4 bg-dark-grey text-beige mt-4 items-center justify-between">
+          <div className="cols-span-2">
             <div className="flex items-center">
               {currentTrack.album.images[0] && (
                 <img
@@ -148,26 +148,29 @@ const MusicPlayer: React.FC = () => {
                   className="w-10 h-10 object-fit lg:w-10 lg:h-10 mr-4"
                 />
               )}
-              <h3 className="text-lg font-medium">{currentTrack.name}</h3>
+              <div>
+                <h3 className="text-lg font-medium">{currentTrack.name}</h3>
+                <p className="text-yellow ">{currentTrack.artists}</p>
+              </div>
             </div>
           </div>
-          <div className="cols-span-1 border flex justify-center">
+          <div className="cols-span-1 flex justify-center items-center">
             <button
-              className="bg-gray-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-full"
+              className="bg-gray-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-full hover:scale-50 text-yellow"
               onClick={playPreviousTrack}
             >
               <PreviousButton />
             </button>
             {isPlaying ? (
               <button
-                className="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full"
+                className="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full hover:scale-50 text-yellow"
                 onClick={pauseTrack}
               >
                 <PauseButton />
               </button>
             ) : (
               <button
-                className="bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full"
+                className="text-white font-bold py-2 px-4 rounded-full hover:scale-50 text-yellow"
                 onClick={() => {
                   audio.play();
                   setIsPlaying(true);
@@ -177,11 +180,33 @@ const MusicPlayer: React.FC = () => {
               </button>
             )}
             <button
-              className="bg-gray-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-full"
+              className="bg-gray-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-full hover:scale-50 text-yellow"
               onClick={playNextTrack}
             >
               <NextButton />
             </button>
+            <progress
+              className="w-full h-2 relative"
+              value={audio.currentTime}
+              max={audio.duration}
+              style={{
+                appearance: "none",
+                borderRadius: "5px",
+              }}
+            />
+            <style>{`
+  progress::-webkit-progress-bar {
+    background-color: #F7F2EC;
+  }
+  progress::-webkit-progress-value {
+    background-color: #FFDA8A;
+    border-radius: 5px;
+  }
+  progress::-moz-progress-bar {
+    background-color: #FFDA8A;
+    border-radius: 5px;
+  }
+`}</style>
           </div>
         </div>
       )}

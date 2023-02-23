@@ -63,15 +63,17 @@ const Content2: React.FC = () => {
   };
 
   return (
-    <div className="rounded-lg flex flex-col justify-center items-center">
-      <h1 className="text-xl font-bold mb-4 flex justify-center">Discover</h1>
+    <div className="rounded-lg flex flex-col justify-center items-center mb-10">
+      <h1 className="text-xl font-bold mb-4 mt-10 flex justify-center">
+        Discover
+      </h1>
 
-      <div className="flex justify-center">
-        <div className="grid grid-cols-4 md:grid-cols-3 gap-2 ">
+      <div className="flex justify-center ">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4  gap-2 ">
           {visibleTracks.map((track) => (
             <div
               key={track.id}
-              className=" hover:scale-125 rounded-lg  flex items-center justify-center shadow-xl"
+              className="col-span-1 hover:scale-125 rounded-lg flex flex-col items-center justify-center shadow-xl"
             >
               <img
                 src={track.album.images[0]}
@@ -84,7 +86,10 @@ const Content2: React.FC = () => {
         </div>
       </div>
 
-      <button className="font-bold rounded-full mt-4" onClick={loadMoreTracks}>
+      <button
+        className="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full mt-4"
+        onClick={loadMoreTracks}
+      >
         Load More
       </button>
 
