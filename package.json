@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start":"serve dist",
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "@stripe/react-stripe-js": "^1.16.4",
