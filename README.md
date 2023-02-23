@@ -5,7 +5,6 @@
 Wave is a music streaming platform offering users access to a vast library of music from various artists and genres. To access the Wave catalog, users must register, pay for their subscription, and log in.
 
 ![] (landingpage.png) 
-<br>
 ![](subscribepage.png) 
 <br>
 ![](mainpage.png) 
