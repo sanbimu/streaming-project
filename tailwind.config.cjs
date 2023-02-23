@@ -23,6 +23,7 @@ module.exports = {
       mulish: ["Mulish", "sans-serif"],
       raleway: ["Raleway", "sans-serif"],
       podkova: ["Podkova", "serif"],
+      ubuntu: ['Ubuntu', "sans-serif"]
     },
     extend: {
       borderColor: {
