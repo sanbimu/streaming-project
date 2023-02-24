@@ -12,6 +12,13 @@ const SubscribeOne = () => {
 
   const NavigateTo = useNavigate();
 
+  const buttonStyle = {
+    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+    marginBottom: '15px',
+    letterSpacing: '0.3em',
+    textShadow: '0.2px 0.2px 0px rgba(255,234,189,0.5)',
+  };
+
   const axiosInstance = axios.create({
     baseURL: 'https://backwave.herokuapp.com/',
     timeout: 5000,
@@ -115,10 +122,11 @@ const SubscribeOne = () => {
       <Button 
         onClick={handleSubscribeOne}
         id = "longTextButton" 
-        className = "w-44 h-8 items-center mt-2 mb-4 mx-auto" 
+        className = "font-ubuntu w-44 h-8 items-center mt-2 mb-4 mx-auto" 
         text="NEXT" 
         type="submit" 
         disabled={!isChecked} 
+        style={buttonStyle} 
       />
       </div>
       <div>

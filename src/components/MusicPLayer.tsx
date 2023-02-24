@@ -100,11 +100,11 @@ const MusicPlayer: React.FC = () => {
           <Logo />
         </div>
         <div className="  col-span-2  items-center flex justify-center ">
-          <p className=" rounded p-4 w-full text-center">
+          <p className="font-raleway rounded p-4 w-full text-center">
             {" "}
             <input
               type="text"
-              placeholder="Search for a wavetrack"
+              placeholder="Search for a Wave track"
               className="p-2   rounded-md w-full"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -116,8 +116,8 @@ const MusicPlayer: React.FC = () => {
         </div>
       </div>
 
-      <h1 className="text-xl font-bold mb-4 mt-10 flex justify-center">
-        Weekly Top Track
+      <h1 className="font-ubuntu text-xl font-bold mb-4 mt-10 flex justify-center">
+        Weekly Top Tracks
       </h1>
       <div className="flex justify-center pb-6 ">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4  gap-2 ">

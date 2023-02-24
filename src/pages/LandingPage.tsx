@@ -20,7 +20,12 @@ const LandingPage = () => {
         backgroundPosition: 'center'
       };
 
-    
+      const buttonStyle = {
+        boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+        marginBottom: '35px',
+        letterSpacing: '0.3em',
+        textShadow: '0.2px 0.2px 0px rgba(255,234,189,0.5)',
+      };
 
     const handleCheck = () => {
         const cookiesDiv = document.getElementById("Cookies");
@@ -46,8 +51,8 @@ const LandingPage = () => {
                             <div className = "flex justify-center items-center mx-auto mt-14 mb-24">
                                 <Logo />
                             </div>
-                            <Button id = "CustomButton" className = "w-56 h-12 text-base items-center" text="LOGIN" onClick={clickLogin} />
-                            <Button id = "CustomButton" className = "w-56 h-12 items-center" text="SUBSCRIBE" onClick={clickSubscribe}/>
+                            <Button id = "CustomButton" className = "w-56 h-12 text-base items-center" text="LOGIN" onClick={clickLogin} style={buttonStyle} />
+                            <Button id = "CustomButton" className = "w-56 h-12 items-center" text="SUBSCRIBE" onClick={clickSubscribe} style={buttonStyle}/>
                         </div>
                     </div>
                         <div id="Cookies" className = "bg-dark-grey flex fixed right-1 bottom-1 p-2 m-1 w-2/5">
