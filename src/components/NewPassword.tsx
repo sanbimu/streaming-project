@@ -7,6 +7,13 @@ const NewPassword= () => {
   const [newPassword, setNewPassword] = useState("");
   const [errorString, setErrorString] = useState("");
 
+  const buttonStyle = {
+    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+    marginBottom: '35px',
+    letterSpacing: '0.3em',
+    textShadow: '0.2px 0.2px 0px rgba(255,234,189,0.5)',
+  };
+
   const NavigateTo = useNavigate();
 
   const axiosInstance = axios.create({
@@ -64,6 +71,7 @@ const NewPassword= () => {
         className = "w-44 h-8 items-center mt-8 mb-4 mx-auto" 
         text="SAVE PASSWORD" 
         type="submit" 
+        style={buttonStyle}
       />
   </div>
   );
