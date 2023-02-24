@@ -11,6 +11,13 @@ const LoginForm = () => {
 
   const Navigate = useNavigate();
 
+  const buttonStyle = {
+    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+    marginBottom: '15px',
+    letterSpacing: '0.3em',
+    textShadow: '0.2px 0.2px 0px rgba(255,234,189,0.5)',
+  };
+
   const axiosInstance = axios.create({
     baseURL: 'https://backwave.herokuapp.com/',
     timeout: 5000,
@@ -88,8 +95,8 @@ const LoginForm = () => {
             </div>
       </form>
       <div className="flex flex-col">
-        <Button id = "longTextButton" className = "w-44 h-8 items-center my-4 mx-auto mt-8" text="LOGIN" onClick={handleLogin} type="submit" />
-        <Button id = "longTextButton" className = "w-44 h-8 items-center my-4 mx-auto" text="FORGOT PASSWORD" onClick={handleForgetPassword} type="submit" />
+        <Button id = "longTextButton" className = "w-44 h-8 items-center my-4 mx-auto mt-8" text="LOGIN" onClick={handleLogin} type="submit"  style={buttonStyle} />
+        <Button id = "longTextButton" className = "w-44 h-8 items-center my-4 mx-auto" text="FORGOT PASSWORD" onClick={handleForgetPassword} type="submit"  style={buttonStyle}/>
       </div>
       <div>
         <p className="text-center text-dark-grey text-sm font-raleway mx-4">{errorString}</p>

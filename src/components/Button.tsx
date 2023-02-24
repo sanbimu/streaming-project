@@ -8,6 +8,7 @@ interface ButtonProps {
   type?: "button" | "submit" | "reset";
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;
+  style: any;
 };
 
 const Button: React.FC<ButtonProps> = ({ 
@@ -16,7 +17,8 @@ const Button: React.FC<ButtonProps> = ({
    text, 
    type, 
    onClick,
-   disabled
+   disabled,
+   style
   }) => {
   return (
     
@@ -25,6 +27,7 @@ const Button: React.FC<ButtonProps> = ({
         type={type}
         onClick={onClick}
         disabled={disabled}
+        style={style}
         >
         {text}
       </button>
