@@ -122,7 +122,7 @@ const SubscribeOne = () => {
       <Button 
         onClick={handleSubscribeOne}
         id = "longTextButton" 
-        className = "w-44 h-8 items-center mt-2 mb-4 mx-auto" 
+        className = "font-ubuntu w-44 h-8 items-center mt-2 mb-4 mx-auto" 
         text="NEXT" 
         type="submit" 
         disabled={!isChecked} 

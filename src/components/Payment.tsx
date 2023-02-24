@@ -46,7 +46,7 @@ const Payment = () => {
             If you decide to cancel, please be aware that the cancellation will take effect at the end of your current billing period. 
             This means that you will retain access to Wave until the end of the current period, but will not be charged again in the future</p>
         </div>
-            <Button id = "longTextButton" className = "w-44 h-8 items-center my-4 mx-auto mt-8" text="TO PAYMENT" type="submit" style={buttonStyle} />
+            <Button id = "longTextButton" className = "font-ubuntu w-44 h-8 items-center my-4 mx-auto mt-8" text="TO PAYMENT" type="submit" style={buttonStyle} />
     </div>
   );
 };
