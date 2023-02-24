@@ -5,13 +5,16 @@ import Questions from '../components/Questions';
 import Footer from '../components/Footer';
 import { useNavigate } from "react-router";
 import bgIMG from '../../public/backgroundbigw.jpg'
+import bgIMGs from '../../public/backgroundsmallw.jpg'  
 
 const LandingPage = () => {
     const Navigate = useNavigate();
     const [isChecked, setIsChecked] = useState(false);
 
+    const smallScreen = window.matchMedia("(max-width: 820px)").matches;
+
     const bgStyle = {
-        backgroundImage: `url(${bgIMG})`,
+        backgroundImage: `url(${smallScreen ?  bgIMGs :  bgIMG})`,
         backgroundSize: '100% 60%',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center'
