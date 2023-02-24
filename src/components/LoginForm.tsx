@@ -96,7 +96,7 @@ const LoginForm = () => {
       </form>
       <div className="flex flex-col">
         <Button id = "longTextButton" className = "font-ubuntu w-44 h-8 items-center my-4 mx-auto mt-8" text="LOGIN" onClick={handleLogin} type="submit"  style={buttonStyle} />
-        <Button id = "longTextButton" className = "font-ubuntu w-44 h-8 items-center my-4 mx-auto" text="FORGOT PASSWORD" onClick={handleForgetPassword} type="submit"  style={buttonStyle}/>
+        <Button id = "longTextButton" className = "font-ubuntu text-xs w-44 h-8 items-center my-4 mx-auto" text="FORGOT PASSWORD" onClick={handleForgetPassword} type="submit"  style={buttonStyle}/>
       </div>
       <div>
         <p className="text-center text-dark-grey text-sm font-raleway mx-4">{errorString}</p>

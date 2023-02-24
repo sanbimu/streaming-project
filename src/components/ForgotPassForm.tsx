@@ -69,7 +69,7 @@ const ForgotPassForm= () => {
       <Button 
         onClick={handleResetPassword}
         id = "longTextButton" 
-        className = "font-ubuntu w-44 h-8 items-center mt-8 mb-4 mx-auto" 
+        className = "font-ubuntu text-xs w-44 h-8 items-center mt-8 mb-4 mx-auto" 
         text="RESET PASSWORD" 
         type="submit" 
         style={buttonStyle}
